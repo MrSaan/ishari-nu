@@ -47,8 +47,6 @@ Route::middleware('guest')->group(function () {
 
         Auth::login($user);
 
-        return redirect('/muhud');
-        // dd($user->getName(), $user->getEmail(), $user->getId());
-        // $user->token
+        return redirect('/muhud/1');
     });
 });

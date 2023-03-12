@@ -9,7 +9,7 @@
                 </NavLink>
             </li>
             <li>
-                <NavLink href="/muhud?category=1" :active="$page.component === 'Muhud'">
+                <NavLink href="/muhud/1" :active="$page.component === 'Muhud'">
                     <BookOpenIcon class="w-5 h-5"
                         :class="{ 'text-white': $page.component === 'Muhud', 'text-green-600': $page.component !== 'Muhud' }" />
                     <span class="mx-4 text-lg font-semibold">Muhud</span>

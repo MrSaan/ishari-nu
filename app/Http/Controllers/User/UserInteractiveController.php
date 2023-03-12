@@ -8,59 +8,31 @@ use App\Models\Muhud;
 use App\Models\Pimpinan;
 use App\Models\Shalawat;
 use App\Models\Songs;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Inertia\Inertia;
 use Maize\Markable\Models\Like;
 
 class UserInteractiveController extends Controller
 {
-    public function muhud()
+    public function getCategoryMuhud($id)
     {
-        // dd(auth()->user());
-        if (Request::all('category', 'pimpinan')) {
-            $audioPimpinan = Request::only('pimpinan');
-        } else {
-            $audioPimpinan = 6;
-        }
-
+        $user = Auth::user();
         $kumpulanMuhud = Muhud::all();
+        $audioPimpinan = Request::only('pimpinan');
 
         $pimpinan = Audio::query()
-            ->when(Request::only('category'), function ($query, $category) {
-                $query->leftJoin('pimpinans', 'pimpinan_id', '=', 'pimpinans.id')->where('muhud_id', '=', $category)->select('pimpinan_id', 'nama_pimpinan', 'avatar')->distinct()->get();
-            }, function ($query) {
-                $query->leftJoin('pimpinans', 'pimpinan_id', '=', 'pimpinans.id')->where('muhud_id', '=', 1)->select('pimpinan_id', 'nama_pimpinan', 'avatar')->distinct()->get();
-            })
-            ->get();
-
-        $teks = Shalawat::query()
-            ->when(Request::only('category'), function ($query, $category) {
-                $query->where('muhud_id', '=', $category);
-            }, function ($query) {
-                $query->where('muhud_id', '=', 1);
-            })
-            ->paginate(100)
-            ->through(fn ($shalawat) => [
-                'id' => $shalawat->id,
-                'diwan' => $shalawat->numberOfDiwan,
-                'syarafulAnam' => $shalawat->numberOfMaulidSyarafulAnam,
-                'teks' => $shalawat->text_shalawat,
-                'transliterasi' => $shalawat->transliteration,
-                'terjemahan' => $shalawat->translation_id,
-                'audio' => $shalawat->audio()->where('pimpinan_id', '=', $audioPimpinan)->get(),
-                'love' => auth() ? Like::has($shalawat, auth()->user()) : false,
-            ]);
+            ->when($id, function ($query, $id) {
+                $query->leftJoin('pimpinans', 'pimpinan_id', '=', 'pimpinans.id')->where('muhud_id', '=', $id)->select('pimpinan_id', 'nama_pimpinan', 'avatar')->distinct()->get();
+            })->get();
 
         if (Request::input('search')) {
-            $teks = Shalawat::query()
+            $muhud = Shalawat::query()
                 ->when(Request::input('search'), function ($query, $search) {
                     $query->where('text_shalawat', 'like', '%' . $search . '%');
                     $query->orWhere('transliteration', 'like', '%' . $search . '%');
                     $query->orWhere('translation_id', 'like', '%' . $search . '%');
-                })
-                ->with('audio')
-                ->paginate(100)
-                ->through(fn ($shalawat) => [
+                })->paginate(100)->through(fn ($shalawat) => [
                     'id' => $shalawat->id,
                     'diwan' => $shalawat->numberOfDiwan,
                     'syarafulAnam' => $shalawat->numberOfMaulidSyarafulAnam,
@@ -68,14 +40,29 @@ class UserInteractiveController extends Controller
                     'transliterasi' => $shalawat->transliteration,
                     'terjemahan' => $shalawat->translation_id,
                     'audio' => $shalawat->audio()->where('pimpinan_id', '=', $audioPimpinan)->get(),
-                    'love' => auth() ? Like::has($shalawat, auth()->user()) : false,
+                    'love' => auth() ? Like::has($shalawat, $user) : false,
+                ]);
+
+        } else {
+            $muhud = Shalawat::query()
+                ->when($id, function ($query, $id) {
+                    $query->where('muhud_id', '=', $id);
+                })->paginate(100)->through(fn ($shalawat) => [
+                    'id' => $shalawat->id,
+                    'diwan' => $shalawat->numberOfDiwan,
+                    'syarafulAnam' => $shalawat->numberOfMaulidSyarafulAnam,
+                    'teks' => $shalawat->text_shalawat,
+                    'transliterasi' => $shalawat->transliteration,
+                    'terjemahan' => $shalawat->translation_id,
+                    'audio' => $shalawat->audio()->where('pimpinan_id', '=', $audioPimpinan)->get(),
+                    'love' => auth() ? Like::has($shalawat, $user) : false,
                 ]);
         }
 
         return Inertia::render('Muhud', [
-            'filters' => Request::all('search', 'category', 'pimpinan'),
+            'filters' => Request::all('search', 'pimpinan'),
             'kumpulanMuhud' => $kumpulanMuhud,
-            'shalawat' => $teks,
+            'shalawat' => $muhud,
             'pimpinan' => $pimpinan,
         ]);
     }

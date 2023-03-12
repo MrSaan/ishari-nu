@@ -114,7 +114,7 @@
         <Footer />
     </div>
 </template>
-  
+
 <script setup>
 import HeroSection from '@/Pages/Overview/HeroSection.vue';
 import Testimonial from '@/Pages/Overview/Testimonial.vue';
@@ -131,7 +131,7 @@ const user = computed(() => usePage().props.value?.auth?.user)
 const mobileMenuOpen = ref(false)
 
 const navigation = [
-    { name: 'Muhud', href: '/muhud?category=1' },
+    { name: 'Muhud', href: '/muhud/1' },
     { name: 'Pimpinan', href: '/reciters' },
     { name: 'Shalawat Ishari', href: '/play' },
     { name: 'Loved', href: '/loved' },

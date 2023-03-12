@@ -118,8 +118,8 @@
                             </PopoverPanel>
                         </Popover>
 
-
-                        <Pimpinan :pimpinan="pimpinan" :filters="filters" :category="category" />
+                        <!-- Pimpinan -->
+                        <Pimpinan :pimpinan="pimpinan" :filter="filters" />
                     </div>
                 </div>
 

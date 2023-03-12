@@ -39,13 +39,21 @@ Route::get('/support', [UserInteractiveController::class, 'support']);
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/muhud', [UserInteractiveController::class, 'muhud'])->name('muhud');
+    Route::get('/muhud/{id}', [UserInteractiveController::class, 'getCategoryMuhud']);
     Route::get('/reciters', [UserInteractiveController::class, 'reciters'])->name('reciters');
     Route::get('/play', [UserInteractiveController::class, 'Musics'])->name('music');
     Route::post('/loved', [UserInteractiveController::class, 'loved']);
     Route::get('/loved', [UserInteractiveController::class, 'getLoved'])->name('loved');
 
     Route::get('/profile', [UserController::class, 'showProfile'])->name('profile');
+
+    Route::put('/profile/{user}', [UserController::class, 'edit']);
+
+    Route::get('/json', [UserInteractiveController::class, 'json']);
+});
+
+Route::group(['middleware' => ['auth', 'role:admin']], function () {
+    //Route yang diizinkan hanya untuk pengguna dengan peran "admin"
     Route::get('/admin/create', [AdminController::class, 'index'])->name('admin');
     Route::get('/admin/pimpinan', [AdminController::class, 'pimpinan']);
     Route::get('/admin/audio', [AdminController::class, 'audio'])->name('audio');
@@ -60,9 +68,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/song', [AdminController::class, 'addSong']);
 
     Route::put('/admin/daftarPimpinan/{pimpinan}', [AdminController::class, 'edit']);
-    Route::put('/profile/{user}', [UserController::class, 'edit']);
-
-    Route::get('/json', [UserInteractiveController::class, 'json']);
 });
 
 require __DIR__ . '/auth.php';
