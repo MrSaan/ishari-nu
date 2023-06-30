@@ -99,6 +99,7 @@
             <div class="relative px-6 lg:px-8">
                 <HeroSection />
                 <Testimonial />
+                <!-- <Thanks /> -->
                 <CallToAction />
             </div>
             <div class="relative max-w-6xl mx-auto pt-10 xl:pt-0 mt-10 xl:mt-2">
@@ -122,6 +123,7 @@ import CallToAction from '@/Pages/Overview/CallToAction.vue';
 import Feature from '@/Pages/Overview/Feature.vue';
 import Footer from '@/Components/Footer.vue';
 import ContactUs from '@/Components/ContactUs.vue';
+import Thanks from './Overview/Thanks.vue';
 import { computed, ref } from 'vue'
 import { Bars3Icon, XMarkIcon, ExclamationTriangleIcon } from '@heroicons/vue/24/outline'
 import { Dialog, DialogPanel, DialogTitle, DialogDescription, TransitionRoot, TransitionChild } from '@headlessui/vue'

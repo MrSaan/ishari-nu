@@ -6,7 +6,7 @@
                 <div class="flex justify-between">
 
                     <!-- kiri -->
-                    <CategoryMuhud :filters="filters" :kumpulan-muhud="kumpulanMuhud" :category="category" />
+                    <CategoryMuhud :filters="props.id" :kumpulanMuhud="kumpulanMuhud" :category="category" />
 
                     <!-- kanan -->
                     <div class="flex items-center gap-2 group">
@@ -20,6 +20,7 @@
                             </Link>
                         </div>
 
+                        <!-- mobile -->
                         <Popover class="relative">
                             <PopoverButton>
                                 <div
@@ -34,80 +35,28 @@
                             </PopoverButton>
 
                             <PopoverPanel
-                                class="absolute left-1/2 z-10 mt-3 w-screen max-w-xs -translate-x-1/2 transform px-4">
-                                <div class="flex flex-col bg-white rounded-2xl p-4 space-y-4 shadow-xl">
-                                    <!-- theme -->
-                                    <div class="flex flex-col">
-                                        <div class="inline-flex space-x-2">
-                                            <div class="text-green-600">
-                                                <WrenchScrewdriverIcon class="h-4 w-4" />
-                                            </div>
-                                            <h6 class="font-semibold text-base">Tema</h6>
-                                        </div>
-                                        <div class="flex justify-between mt-2 p-1 bg-gray-200 rounded-full">
-                                            <!-- Mode Terang -->
-                                            <div
-                                                class="inline-flex shrink w-1/2 justify-center space-x-2 p-2 items-center bg-indigo-600 text-white text-xs font-semibold rounded-full">
-                                                <div>
-                                                    <SunIcon class="h-5 w-5" />
-                                                </div>
-                                                <h6>Terang</h6>
-                                            </div>
-                                            <!-- Mode Gelap -->
-                                            <div
-                                                class="inline-flex shrink w-1/2 justify-center space-x-2 p-2 items-center text-xs font-semibold rounded-full">
-                                                <div>
-                                                    <MoonIcon class="h-5 w-5 text-green-600" />
-                                                </div>
-                                                <h6>Gelap</h6>
-                                            </div>
-                                        </div>
-                                    </div>
+                                class="absolute p-1.5 bg-gray-100 z-10 mt-3 w-screen max-w-xs -translate-x-[11rem] md:-translate-x-8 transform px-4">
+                                <Setting :button="button" @terjemahan="terjemahan"
+                                    @transliterasi="transliterasi" />
 
-                                    <!-- divider -->
-                                    <div class="border-t-[1px]"></div>
-
-                                    <!-- Terjemahan oleh -->
-                                    <div class="flex flex-col">
-                                        <div class="inline-flex space-x-2">
-                                            <div class="text-green-600">
-                                                <LanguageIcon class="h-4 w-4" />
-                                            </div>
-                                            <h6 class="text-base font-semibold">Terjemahan</h6>
-                                        </div>
-                                        <div
-                                            class="mt-2 p-2 w-full bg-gray-200 rounded-full flex justify-between items-center">
-                                            <h6 class="font-semibold text-base ml-2 text-gray-400">Kiai M Nuruddin</h6>
-                                            <div class="mr-2 font-semibold">
-                                                <ChevronDownIcon class="h-4 w-4" />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <!-- iklan section -->
-                                <div class="w-[300px] h-[250px] border mt-4 flex items-center justify-center">
-                                    untuk iklan
-                                </div>
-                                <div class="w-[300px] h-[250px] border mt-4 flex items-center justify-center">
-                                    untuk iklan
-                                </div>
                             </PopoverPanel>
                         </Popover>
 
 
-                        <Pimpinan :pimpinan="pimpinan" :filters="filters" :category="category" />
+                        <Pimpinan :pimpinan="pimpinan" :filter="filters" />
                     </div>
                 </div>
 
                 <!-- text shalawat -->
-                <Disclosure :defaultOpen="true">
+                <Disclosure :defaultOpen="true" v-slot="{ open }">
                     <DisclosureButton>
                         <div class="pt-8 pb-4 bg-green-400 bg-opacity-20 rounded-lg">
                             <div class="flex flex-col justify-center items-center">
                                 <h6 class="text-sm text-red-400 font-semibold"></h6>
-                                <h5 class="text-base lg:text-xl font-bold font-urdu">
-                                    اللّٰهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ عَلَيْهِ
+                                <h5 class="text-base lg:text-xl font-bold font-urdu flex items-center gap-2">
+                                    <ChevronDoubleUpIcon class="h-4" :class="open && 'rotate-180 transform'" />
+                                    <span>اللّٰهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ عَلَيْهِ</span>
+                                    <ChevronDoubleUpIcon class="h-4" :class="open && 'rotate-180 transform'" />
                                 </h5>
                                 <span class="mt-6 text-xs italic">( bagian syaraful Anam )</span>
                             </div>
@@ -116,71 +65,71 @@
                     <transition enter-active-class="transition duration-100 ease-out"
                         enter-from-class="transform scale-95 opacity-0" enter-to-class="transform scale-100 opacity-100"
                         leave-active-class="transition duration-75 ease-out"
-                        leave-from-class="transform scale-100 opacity-100"
-                        leave-to-class="transform scale-95 opacity-0">
+                        leave-from-class="transform scale-100 opacity-100" leave-to-class="transform scale-95 opacity-0">
                         <DisclosurePanel>
-                            <template v-for="text in shalawat.data" :key="text.id">
-                                <div v-if="text.love">
-                                    <div v-if="text.syarafulAnam" class="bg-white rounded-lg p-4 mb-2" :id="text.id">
-                                        <div class="flex justify-between items-center">
-                                            <h6 class="text-sm text-red-400 font-semibold"></h6>
-                                            <h5
-                                                class="text-base lg:text-2xl text-right font-arabic leading-relaxed lg:leading-loose">
-                                                {{
-                                                        text.teks
-                                                }}
-                                            </h5>
-                                        </div>
-                                        <div class="flex flex-col">
-                                            <h6 class="text-sm lg:text-base mt-2 italic">{{ text.transliterasi }}</h6>
-                                            <p class="text-sm lg:text-base lg:font-semibold mt-2 lg:leading-normal">{{
-                                                    text.terjemahan
+                            <template v-for="text in syarafulAnam" :key="text.id">
+                                <div v-if="text.love" class="bg-white rounded-lg p-4 mb-2" :id="text.id">
+                                    <div class="flex justify-between items-center">
+                                        <h6 class="text-sm text-red-400 font-semibold"></h6>
+                                        <h5
+                                            class="text-base lg:text-2xl text-right font-arabic leading-relaxed lg:leading-loose">
+                                            {{
+                                                text.teks
                                             }}
-                                            </p>
-                                        </div>
-                                        <div
-                                            class="flex flex-row space-x-2 lg:space-x-3 text-gray-600 mt-2 lg:mt-3 pt-4 border-t-[1px] border-gray-200 items-center">
+                                        </h5>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <h6 v-if="isTransliterasi" class="text-sm lg:text-base mt-2 italic">{{ text.transliterasi }}</h6>
+                                        <p v-if="isTerjemahan" class="text-sm lg:text-base lg:font-semibold mt-2 lg:leading-normal">{{
+                                            text.terjemahan
+                                        }}
+                                        </p>
+                                    </div>
+                                    <div
+                                        class="flex flex-row space-x-2 lg:space-x-3 text-gray-600 mt-2 lg:mt-3 pt-4 border-t-[1px] border-gray-200 items-center">
 
-                                            <div @click="play(`audioPlay-${text.id}`, text.id, selected[text.id]?.audio)"
+                                        <div @click="play(`audioPlay-${text.id}`, text.id)"
+                                            class="cursor-pointer hover:text-indigo-600 hover:bg-slate-200 p-1 rounded-full"
+                                            :id="`buttonPlay-${text.id}`">
+                                            <span class="sr-only">Play button</span>
+                                            <PlayIcon class="w-5 h-5" />
+                                        </div>
+
+                                        <div v-if="isPlaying == `audioPlay-${text.id}`"
+                                            @click="pause(`audioPlay-${text.id}`, text.id)" :id="`buttonPause-${text.id}`"
+                                            class="cursor-pointer hover:text-indigo-600 hover:bg-slate-200 p-1 rounded-full">
+                                            <span class="sr-only">Button Pause</span>
+                                            <PauseIcon class="w-5 h-5" />
+                                        </div>
+                                        <form @submit.prevent="submit(text.id)">
+                                            <button type="submit"
                                                 class="cursor-pointer hover:text-indigo-600 hover:bg-slate-200 p-1 rounded-full"
-                                                :id="`buttonPlay-${text.id}`">
-                                                <span class="sr-only">Play button</span>
-                                                <PlayIcon class="w-5 h-5" />
-                                                <audio class="hidden" :src="`/storage/${selected[text.id]?.audio}`"
-                                                    :id="`audioPlay-${text.id}`" controls></audio>
-                                            </div>
-
-                                            <div v-if="isPlaying == `audioPlay-${text.id}`"
-                                                @click="pause(`audioPlay-${text.id}`, text.id)"
-                                                :id="`buttonPause-${text.id}`"
-                                                class="cursor-pointer hover:text-indigo-600 hover:bg-slate-200 p-1 rounded-full">
-                                                <span class="sr-only">Button Pause</span>
-                                                <PauseIcon class="w-5 h-5" />
-                                            </div>
-                                            <form @submit.prevent="submit(text.id)">
-                                                <button type="submit"
-                                                    class="cursor-pointer hover:text-indigo-600 hover:bg-slate-200 p-1 rounded-full"
-                                                    :class="[text.love ? 'text-rose-600 bg-rose-100' : '']">
-                                                    <span class="sr-only">Button Love</span>
-                                                    <HeartIcon class="w-5 h-5" />
-                                                </button>
-                                            </form>
-                                            <div class="cursor-pointer hover:text-indigo-600 hover:bg-slate-200 p-1 rounded-full"
-                                                @click="copy(text.id)">
-                                                <span class="sr-only">Button Copy</span>
-                                                <DocumentDuplicateIcon class="w-5 h-5" />
-                                            </div>
-                                            <div>
-                                                <select v-model="selected[text.id]"
-                                                    class="appearance-none form-select block w-20 md:w-40 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
-                                                    <option v-for="audio in text?.audio" :key="audio.id"
-                                                        :value="{ audio: audio?.audio_1 }" class="text-base">
-                                                        {{ audio.type }}
-                                                    </option>
-
-                                                </select>
-                                            </div>
+                                                :class="[text.love ? 'text-rose-600 bg-rose-100' : '']">
+                                                <span class="sr-only">Button Love</span>
+                                                <HeartIcon class="w-5 h-5" />
+                                            </button>
+                                        </form>
+                                        <div class="cursor-pointer hover:text-indigo-600 hover:bg-slate-200 p-1 rounded-full"
+                                            @click="copy(text.id)">
+                                            <span class="sr-only">Button Copy</span>
+                                            <DocumentDuplicateIcon class="w-5 h-5" />
                                         </div>
+                                        <div v-if="!text.audio.length == 0">
+                                            <select v-model="selected" @change="setAudio(text.id)"
+                                                class="appearance-none form-select block md:w-40 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
+                                                <option v-for="audio in text?.audio" :key="audio.id"
+                                                    :value="{ id: text.id, audio: audio?.audio_1, referen_audio: audio?.referen_audio }"
+                                                    class="text-base">
+                                                    {{ audio.type }} - {{ audio.id }}
+                                                </option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div v-if="selected.referen_audio" class="flex text-sm italic text-gray-600">
+                                        <span v-if="selected.id === text.id" class="mt-2">
+                                            referensi irama audio - {{ selected.referen_audio }}
+                                        </span>
                                     </div>
                                 </div>
                             </template>
@@ -190,13 +139,15 @@
 
                 <!-- iklan -->
 
-                <Disclosure :defaultOpen="true">
+                <Disclosure :defaultOpen="true" v-slot="{ open }">
                     <DisclosureButton>
                         <div class="pt-8 pb-4 bg-green-400 bg-opacity-20 rounded-lg">
                             <div class="flex flex-col justify-center items-center">
                                 <h6 class="text-sm text-red-400 font-semibold"></h6>
-                                <h5 class="text-base lg:text-xl font-bold font-urdu">
-                                    اللّٰهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ عَلَيْهِ
+                                <h5 class="text-base lg:text-xl font-bold font-urdu flex items-center gap-2">
+                                    <ChevronDoubleUpIcon class="h-4" :class="open && 'rotate-180 transform'" />
+                                    <span>اللّٰهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ عَلَيْهِ</span>
+                                    <ChevronDoubleUpIcon class="h-4" :class="open && 'rotate-180 transform'" />
                                 </h5>
                                 <span class="mt-6 text-xs italic">( bagian syaraful Anam )</span>
                             </div>
@@ -205,71 +156,72 @@
                     <transition enter-active-class="transition duration-100 ease-out"
                         enter-from-class="transform scale-95 opacity-0" enter-to-class="transform scale-100 opacity-100"
                         leave-active-class="transition duration-75 ease-out"
-                        leave-from-class="transform scale-100 opacity-100"
-                        leave-to-class="transform scale-95 opacity-0">
+                        leave-from-class="transform scale-100 opacity-100" leave-to-class="transform scale-95 opacity-0">
                         <DisclosurePanel>
-                            <template v-for="text in shalawat.data" :key="text.id">
-                                <div v-if="text.love">
-                                    <div v-if="text.diwan" class="bg-white rounded-lg p-4 mb-2" :id="text.id">
-                                        <div class="flex justify-between items-center">
-                                            <h6 class="text-sm text-red-400 font-semibold"></h6>
-                                            <h5
-                                                class="text-base lg:text-2xl text-right font-arabic leading-relaxed lg:leading-loose">
-                                                {{
-                                                        text.teks
-                                                }}
-                                            </h5>
-                                        </div>
-                                        <div class="flex flex-col">
-                                            <h6 class="text-sm lg:text-base mt-2 italic">{{ text.transliterasi }}</h6>
-                                            <p class="text-sm lg:text-base lg:font-semibold mt-2 lg:leading-normal">{{
-                                                    text.terjemahan
+                            <template v-for="text in diwan" :key="text.id">
+                                <div v-if="text.love" class="bg-white rounded-lg p-4 mb-2" :id="text.id">
+                                    <div class="flex justify-between items-center">
+                                        <h6 class="text-sm text-red-400 font-semibold"></h6>
+                                        <h5
+                                            class="text-base lg:text-2xl text-right font-arabic leading-relaxed lg:leading-loose">
+                                            {{
+                                                text.teks
                                             }}
-                                            </p>
-                                        </div>
-                                        <div
-                                            class="flex flex-row space-x-2 lg:space-x-3 text-gray-600 mt-2 lg:mt-3 pt-4 border-t-[1px] border-gray-200 items-center">
+                                        </h5>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <h6 v-if="isTransliterasi" class="text-sm lg:text-base mt-2 italic">{{ text.transliterasi }}</h6>
+                                        <p v-if="isTerjemahan" class="text-sm lg:text-base lg:font-semibold mt-2 lg:leading-normal">{{
+                                            text.terjemahan
+                                        }}
+                                        </p>
+                                    </div>
+                                    <div
+                                        class="flex flex-row space-x-2 lg:space-x-3 text-gray-600 mt-2 lg:mt-3 pt-4 border-t-[1px] border-gray-200 items-center">
 
-                                            <div @click="play(`audioPlay-${text.id}`, text.id, selected[text.id]?.audio)"
+                                        <div @click="play(`audioPlay-${text.id}`, text.id)"
+                                            class="cursor-pointer hover:text-indigo-600 hover:bg-slate-200 p-1 rounded-full"
+                                            :id="`buttonPlay-${text.id}`">
+                                            <span class="sr-only">Play button</span>
+                                            <PlayIcon class="w-5 h-5" />
+
+                                        </div>
+
+                                        <div v-if="isPlaying == `audioPlay-${text.id}`"
+                                            @click="pause(`audioPlay-${text.id}`, text.id)" :id="`buttonPause-${text.id}`"
+                                            class="cursor-pointer hover:text-indigo-600 hover:bg-slate-200 p-1 rounded-full">
+                                            <span class="sr-only">Button Pause</span>
+                                            <PauseIcon class="w-5 h-5" />
+                                        </div>
+                                        <form @submit.prevent="submit(text.id)">
+                                            <button type="submit"
                                                 class="cursor-pointer hover:text-indigo-600 hover:bg-slate-200 p-1 rounded-full"
-                                                :id="`buttonPlay-${text.id}`">
-                                                <span class="sr-only">Play button</span>
-                                                <PlayIcon class="w-5 h-5" />
-                                                <audio class="hidden" :src="`/storage/${selected[text.id]?.audio}`"
-                                                    :id="`audioPlay-${text.id}`" controls></audio>
-                                            </div>
-
-                                            <div v-if="isPlaying == `audioPlay-${text.id}`"
-                                                @click="pause(`audioPlay-${text.id}`, text.id)"
-                                                :id="`buttonPause-${text.id}`"
-                                                class="cursor-pointer hover:text-indigo-600 hover:bg-slate-200 p-1 rounded-full">
-                                                <span class="sr-only">Button Pause</span>
-                                                <PauseIcon class="w-5 h-5" />
-                                            </div>
-                                            <form @submit.prevent="submit(text.id)">
-                                                <button type="submit"
-                                                    class="cursor-pointer hover:text-indigo-600 hover:bg-slate-200 p-1 rounded-full"
-                                                    :class="[text.love ? 'text-rose-600 bg-rose-100' : '']">
-                                                    <span class="sr-only">Button Love</span>
-                                                    <HeartIcon class="w-5 h-5" />
-                                                </button>
-                                            </form>
-                                            <div class="cursor-pointer hover:text-indigo-600 hover:bg-slate-200 p-1 rounded-full"
-                                                @click="copy(text.id)">
-                                                <span class="sr-only">Button Copy</span>
-                                                <DocumentDuplicateIcon class="w-5 h-5" />
-                                            </div>
-                                            <div>
-                                                <select v-model="selected[text.id]"
-                                                    class="appearance-none form-select block w-20 md:w-40 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
-                                                    <option v-for="audio in text?.audio" :key="audio.id"
-                                                        :value="{ audio: audio?.audio_1 }" class="text-base">
-                                                        {{ audio.type }}
-                                                    </option>
-
-                                                </select>
-                                            </div>
+                                                :class="[text.love ? 'text-rose-600 bg-rose-100' : '']">
+                                                <span class="sr-only">Button Love</span>
+                                                <HeartIcon class="w-5 h-5" />
+                                            </button>
+                                        </form>
+                                        <div class="cursor-pointer hover:text-indigo-600 hover:bg-slate-200 p-1 rounded-full"
+                                            @click="copy(text.id)">
+                                            <span class="sr-only">Button Copy</span>
+                                            <DocumentDuplicateIcon class="w-5 h-5" />
                                         </div>
+                                        <div v-if="!text.audio.length == 0">
+                                            <select v-model="selected" @change="setAudio(text.id)"
+                                                class="appearance-none form-select block md:w-40 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
+                                                <option v-for="audio in text?.audio" :key="audio.id"
+                                                    :value="{ id: text.id, audio: audio?.audio_1, referen_audio: audio?.referen_audio }"
+                                                    class="text-base">
+                                                    {{ audio.type }} - {{ audio.id }}
+                                                </option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div v-if="selected.referen_audio" class="flex text-sm italic text-gray-600">
+                                        <span v-if="selected.id === text.id" class="mt-2">
+                                            referensi irama audio - {{ selected.referen_audio }}
+                                        </span>
                                     </div>
                                 </div>
                             </template>
@@ -277,7 +229,10 @@
                     </transition>
                 </Disclosure>
             </div>
-            <Setting />
+            <Setting class="hidden xl:flex flex-col" :button="button" @terjemahan="terjemahan" />
+            <div class="hidden">
+                <audio id="audio" controls></audio>
+            </div>
         </div>
     </section>
 </template>
@@ -289,36 +244,92 @@ import Pimpinan from './Muhud/Pimpinan.vue';
 import Setting from './Muhud/Setting.vue';
 import { Link, useForm } from '@inertiajs/inertia-vue3';
 import { Popover, PopoverButton, PopoverPanel, Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
-import { Cog6ToothIcon, PlayIcon, WrenchScrewdriverIcon, LanguageIcon, SunIcon, MoonIcon, ChevronDownIcon, HeartIcon, PauseIcon, DocumentDuplicateIcon } from '@heroicons/vue/24/outline';
-import { ref } from 'vue';
+import { Cog6ToothIcon, PlayIcon, ChevronDoubleUpIcon, HeartIcon, PauseIcon, DocumentDuplicateIcon } from '@heroicons/vue/24/outline';
+import { ref, onMounted, onUpdated } from 'vue';
 import { Inertia } from '@inertiajs/inertia';
 
-defineProps({
+const props = defineProps({
     filters: Object,
     kumpulanMuhud: Array,
     pimpinan: Object,
     shalawat: Object,
+    id: String,
 })
 
 
+// get Data
+const diwan = ref([])
+const syarafulAnam = ref([])
+
+onMounted(() => {
+    dataDisplay()
+})
+
+onUpdated(() => {
+    dataDisplay()
+})
+
+function dataDisplay() {
+    diwan.value = []
+    syarafulAnam.value = []
+    for (let i = 0; i < props.shalawat.data.length; i++) {
+
+        if (props.shalawat.data[i].diwan !== null) {
+            diwan.value.push(props.shalawat.data[i])
+        }
+
+        if (props.shalawat.data[i].syarafulAnam !== null) {
+            syarafulAnam.value.push(props.shalawat.data[i])
+        }
+
+    }
+}
+
+// hide element
+const button = ref({
+    isTerjemahan: true,
+    isTransliterasi: true,
+})
+const isTerjemahan = ref(true)
+function terjemahan(value) {
+    isTerjemahan.value = value
+    button.value.isTerjemahan = value
+}
+
+const isTransliterasi = ref(true)
+function transliterasi(value) {
+    isTransliterasi.value = value
+    button.value.isTransliterasi = value
+}
+
+// audio configuration
+const audio = new Audio
 let selected = ref({})
 let isPlaying = ref(0)
 let category = ref('loved')
+const track = ref(null)
 
 let form = useForm({
     id: ''
 })
 
 // function
-function play(id, button, audio) { //audio play id, button play id, audio file
+function setAudio(param) {
+    this.audio = document.querySelector('#audio')
+    track.value = param
+    this.audio.src = '/storage/' + selected.value.audio
+}
+
+function play(id, button) { //audio play id, button play id, audio file
 
     if (!audio) {
         return alert("kosong")
     }
+    if (button != track.value) {
+        return alert('pilih audio')
+    }
 
-    this.audio = document.querySelector(`#${id}`);
     this.audio.play();
-
     isPlaying.value = id;
 
     this.buttonPlay = document.querySelector(`#buttonPlay-${button}`);
@@ -339,7 +350,7 @@ function play(id, button, audio) { //audio play id, button play id, audio file
 }
 
 function pause(id, button) {
-    this.audio = document.querySelector(`#${id}`);
+    // this.audio = document.querySelector(`#${id}`);
     this.audio.pause();
 
     this.buttonPlay = document.querySelector(`#buttonPlay-${button}`);
@@ -365,16 +376,10 @@ function copy(id) {
     return alert('copy!!!')
 }
 
-function search(value) {
-    Inertia.get('/muhud', { search: value }, {
+function submit(value) {
+    Inertia.get(`/loved/${props.id}`, { search: value }, {
         preserveState: true,
     })
 }
 
-let submit = (value) => {
-    Inertia.post('/loved', { id: value }, {
-        preserveState: true,
-        preserveScroll: true
-    })
-}
 </script>

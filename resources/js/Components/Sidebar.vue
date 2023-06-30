@@ -9,7 +9,7 @@
                 </svg>
             </div>
 
-            <h2 class="text-3xl font-bold text-gray-800 dark:text-white">Beta v.1</h2>
+            <h2 class="text-3xl font-bold text-gray-800 dark:text-white">Diwan v.1</h2>
         </div>
 
         <div class="flex flex-col justify-between text-slate-800 flex-1 mt-6">

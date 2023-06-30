@@ -6,7 +6,7 @@
         <!-- Content -->
         <div class="md:pl-60 lg:pl-72 w-full min-h-screen md:mx-7 dark:bg-gray-900 dark:border-gray-700">
             <!-- content in here -->
-            <section>
+            <section class="max-w-6xl mx-auto">
                 <slot></slot>
             </section>
         </div>
@@ -15,9 +15,6 @@
 
 <script setup>
 import Sidebar from '@/Components/Sidebar.vue';
-import { Link, } from '@inertiajs/inertia-vue3';
-import { Inertia } from '@inertiajs/inertia';
-import debounce from "lodash/debounce";
 
 defineProps({
     canLogin: Boolean,
@@ -28,4 +25,3 @@ defineProps({
 })
 
 </script>
-    

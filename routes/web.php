@@ -43,7 +43,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/reciters', [UserInteractiveController::class, 'reciters'])->name('reciters');
     Route::get('/play', [UserInteractiveController::class, 'Musics'])->name('music');
     Route::post('/loved', [UserInteractiveController::class, 'loved']);
-    Route::get('/loved', [UserInteractiveController::class, 'getLoved'])->name('loved');
+    Route::get('/loved/{id}', [UserInteractiveController::class, 'getLoved'])->name('loved');
+    Route::get('/detail-audio-pimpinan', [UserInteractiveController::class, 'getDetailAudioPimpinan']);
+    Route::get('/rowi/{id}', [UserInteractiveController::class, 'getRowi']);
 
     Route::get('/profile', [UserController::class, 'showProfile'])->name('profile');
 

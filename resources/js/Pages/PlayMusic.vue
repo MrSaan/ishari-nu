@@ -47,9 +47,8 @@
 
             <div class="mt-4 font-semibold text-xl uppercase font-mono px-4  border-b-4">Daftar Lagu
             </div>
-            <div class="w-full bg-white p-1"></div>
             <div v-for="song in songs.data" :key="song.id"
-                class="bg-white w-full grid items-center grid-cols-6 lg:grid-cols-12 gap-3 py-2 px-4 border-b-[1px] border-b-slate-200">
+                class="bg-white w-full grid items-center grid-cols-6 lg:grid-cols-12 gap-3 py-4 md:py-2 px-4 border-b-[1px] border-b-slate-200">
                 <div @click="currentPlay = song" :class="{ 'bg-green-600 text-gray-100': currentPlay == song }"
                     class="columns-1 cursor-pointer text-green-600 bg-gray-100 hover:text-gray-100 hover:bg-green-600 rounded-full max-w-min p-2">
                     <PlayIcon class="w-6" />
@@ -58,7 +57,7 @@
                     <span class="text-base font-semibold">{{ song.muhud }}</span>
                     <span class="text-xs italic">{{ song.pimpinan }}</span>
                 </div>
-                <div class="text-sm lg:col-span-7">
+                <div class="text-sm lg:col-span-7 hidden md:flex">
                     {{ song.deskripsi }}
                 </div>
                 <!-- <div class="text-xs pt-1">{{ currentDurationTxt }}</div> -->

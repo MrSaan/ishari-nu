@@ -103,6 +103,6 @@ import { XMarkIcon, ChevronDownIcon } from '@heroicons/vue/24/outline';
 let mobileFiltersOpen = ref(false)
 let right = ref('right')
 const user = computed(() => usePage().props.value.auth.user)
-let identity = ref(user.value.name.split(' ').map(name => name[0]).join('').toUpperCase())
+let identity = ref(user.value !== null ? user.value.name.split(' ').map(name => name[0]).join('').toUpperCase() : 'Guest')
 
 </script>

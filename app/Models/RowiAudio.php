@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Muhud extends Model
+class RowiAudio extends Model
 {
     use HasFactory;
 
-    public function shalawat()
+    public function pimpinan()
     {
-        return $this->hasMany(Shalawat::class);
+        return $this->belongsTo(Pimpinan::class);
     }
 
     public function rowi()
     {
-        return $this->hasMany(Rowi::class);
+        return $this->belongsTo(Rowi::class);
     }
 }

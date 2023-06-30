@@ -2,7 +2,7 @@
     <Listbox as="div">
         <div class="relative mt-1">
             <ListboxButton
-                class="relative flex items-center md:w-60 lg:w-max text-sm w-24 cursor-default rounded-full bg-white py-2 pl-3 pr-10 text-left focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500">
+                class="relative flex items-center md:w-60 lg:w-max text-sm w-24 cursor-default rounded-full bg-white py-2 pl-3 pr-10 text-left focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500">
                 <div v-if="selectedPerson" class="flex items-center">
                     <span class="flex justify-center items-center h-6 w-6 overflow-hidden rounded-full bg-gray-300">
                         <span class="font-thin text-xs text-gray-600">
@@ -39,7 +39,7 @@
                         v-slot="{ active, selected }">
                         <Link :href="`?pimpinan=${person.pimpinan_id}`" method="get">
                         <li
-                            :class="[active ? 'text-white bg-indigo-600' : 'text-gray-900', 'relative text-xs md:text-sm md:w-auto cursor-default select-none py-2 pl-3 pr-9']">
+                            :class="[active ? 'text-white bg-green-600' : 'text-gray-900', 'relative text-xs md:text-sm md:w-auto cursor-default select-none py-2 pl-3 pr-9']">
                             <div class="flex items-center">
                                 <span
                                     class="flex justify-center items-center h-6 w-6 overflow-hidden rounded-full bg-gray-300">
@@ -53,7 +53,7 @@
                             </div>
 
                             <span v-if="selected"
-                                :class="[active ? 'text-white' : 'text-indigo-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
+                                :class="[active ? 'text-white' : 'text-green-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
                                 <CheckIcon class="h-5 w-5" aria-hidden="true" />
                             </span>
                         </li>

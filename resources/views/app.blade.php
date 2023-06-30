@@ -43,7 +43,7 @@
     <!-- <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/images/icons/icon-512x512.png"> -->
 
-    <title inertia>{{ config('app.name', 'Laravel') }}</title>
+    <title inertia>ISHARI</title>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">

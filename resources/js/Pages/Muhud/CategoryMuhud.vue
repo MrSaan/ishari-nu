@@ -19,7 +19,7 @@
                     <h5 class="text-xs lg:text-sm text-gray-400">{{ choiceFasal.translation_id }}</h5>
                 </template>
                 <template #content>
-                    <DropdownLink :href="`/muhud/${muhud.id}`" method="get"
+                    <DropdownLink :href="`/${props.category}/${muhud.id}`" method="get"
                         v-for="muhud in kumpulanMuhud" :key="muhud.id"
                         class="block w-full px-4 py-2 text-sm text-left leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
                         {{ muhud.transliteration_id }}
@@ -37,11 +37,11 @@ import { ArrowLeftIcon } from '@heroicons/vue/24/outline';
 import { ref } from 'vue';
 
 let props = defineProps({
-    filters: Object,
+    filters: String,
     kumpulanMuhud: Array,
     category: String,
 })
 
-let pasal = ref(props.filters.category ? props.filters.category : 1)
+let pasal = ref(props.filters)
 let choiceFasal = ref(props.kumpulanMuhud[pasal.value - 1])
 </script>

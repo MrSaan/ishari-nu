@@ -25,7 +25,7 @@
                     kepadanya.” (QS. Al-Ahzab [33]: 56)
                 </p>
                 <div class="mt-8 flex gap-x-4 sm:justify-center">
-                    <Link href="/muhud"
+                    <Link href="/muhud/1"
                         class="inline-block rounded-lg bg-green-500 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-green-600 hover:bg-green-700 hover:ring-green-700">
                     Get started
                     <span class="text-green-200" aria-hidden="true">&rarr;</span>

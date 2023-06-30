@@ -23,6 +23,13 @@
                 </NavLink>
             </li>
             <li>
+                <NavLink href="/rowi/1" :active="$page.component === 'Rowi'">
+                    <MicrophoneIcon class="w-5 h-5"
+                        :class="{ 'text-white': $page.component === 'Muhud', 'text-green-600': $page.component !== 'Rowi' }" />
+                    <span class="mx-4 text-lg font-semibold">Rowi</span>
+                </NavLink>
+            </li>
+            <li>
                 <NavLink href="/play" :active="$page.component === 'PlayMusic'">
                     <PlayCircleIcon class="w-5 h-5"
                         :class="{ 'text-white': $page.component === 'Muhud', 'text-green-600': $page.component !== 'PlayMusic' }" />
@@ -39,7 +46,7 @@
                 </NavLink>
             </li>
             <li>
-                <NavLink href="/loved" :active="$page.component === 'Loved'">
+                <NavLink href="/loved/1" :active="$page.component === 'Loved'">
                     <HeartIcon class="w-5 h-5"
                         :class="{ 'text-white': $page.component === 'Muhud', 'text-green-600': $page.component !== 'Loved' }" />
                     <span class="mx-4 text-lg font-semibold">Disukai</span>

@@ -39,7 +39,7 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
             ],
             'auth.user' => fn () => $request->user()
-                ? $request->user()->only('id', 'name', 'email', 'avatar')
+                ? $request->user()->only('id', 'name', 'email', 'avatar', 'role')
                 : null,
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [

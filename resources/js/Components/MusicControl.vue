@@ -1,6 +1,6 @@
 <template>
     <div
-        class="flex flex-col-reverse md:flex-row items-center w-full rounded-lg bg-white shadow-xl shadow-black/5 ring-1 ring-slate-700/10">
+        class="flex flex-col-reverse md:flex-row items-center w-full md:rounded-lg bg-white shadow-xl shadow-black/5 ring-1 ring-slate-700/10">
         <div class="flex items-center space-x-4 py-4 px-6">
             <!-- undo 15sec -->
             <svg class="h-6 w-6 flex-none cursor-pointer" fill="none" @click="undo()">

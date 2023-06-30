@@ -53,7 +53,7 @@
                         </DropdownLink>
                     </div>
                     <div v-else>
-                        <DropdownLink :href="route('admin')" method="get" as="button">Admin
+                        <DropdownLink v-if="user.role === 'admin'" :href="route('admin')" method="get" as="button">Admin
                         </DropdownLink>
                         <DropdownLink :href="route('profile')" method="get" as="button">Profile
                         </DropdownLink>
@@ -104,7 +104,6 @@
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import Nav from '@/Components/Nav.vue';
-import { Inertia } from '@inertiajs/inertia';
 import { usePage } from '@inertiajs/inertia-vue3';
 import { computed, ref, watch } from 'vue';
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel } from '@headlessui/vue';
@@ -119,13 +118,10 @@ let mobileFiltersOpen = ref(false)
 let right = ref('right')
 
 const user = computed(() => usePage().props.value.auth.user)
-let identity = ref(user.value.name.split(' ').map(name => name[0]).join('').toUpperCase())
+let identity = ref(user.value !== null ? user.value.name.split(' ').map(name => name[0]).join('').toUpperCase() : 'Guest')
 
 let search = ref(props.filters.search)
 watch(search, value => {
-    // Inertia.get('/muhud', { search: value }, {
-    //     preserveState: true,
-    // })
     emit('search', value)
 })
 </script>

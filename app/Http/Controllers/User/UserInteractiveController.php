@@ -26,7 +26,7 @@ class UserInteractiveController extends Controller
                 $query->leftJoin('pimpinans', 'pimpinan_id', '=', 'pimpinans.id')->where('muhud_id', '=', $id)->select('pimpinan_id', 'nama_pimpinan', 'avatar')->distinct()->get();
             })->get();
 
-        if (Request::input('search')) {
+        if (Request::input('search') && Request::input('search') !== null) {
             $muhud = Shalawat::query()
                 ->when(Request::input('search'), function ($query, $search) {
                     $query->where('text_shalawat', 'like', '%' . $search . '%');
@@ -42,7 +42,6 @@ class UserInteractiveController extends Controller
                     'audio' => $shalawat->audio()->where('pimpinan_id', '=', $audioPimpinan)->get(),
                     'love' => auth() ? Like::has($shalawat, $user) : false,
                 ]);
-
         } else {
             $muhud = Shalawat::query()
                 ->when($id, function ($query, $id) {
@@ -64,6 +63,7 @@ class UserInteractiveController extends Controller
             'kumpulanMuhud' => $kumpulanMuhud,
             'shalawat' => $muhud,
             'pimpinan' => $pimpinan,
+            'id' => $id,
         ]);
     }
 
@@ -124,52 +124,24 @@ class UserInteractiveController extends Controller
         }
     }
 
-    public function getLoved()
+    public function getLoved($id)
     {
-        if (Request::only('pimpinan')) {
-            $audioPimpinan = Request::only('pimpinan');
-        } else {
-            $audioPimpinan = 1;
-        }
-
+        $user = Auth::user();
         $kumpulanMuhud = Muhud::all();
+        $audioPimpinan = Request::only('pimpinan');
 
         $pimpinan = Audio::query()
-            ->when(Request::only('category'), function ($query, $category) {
-                $query->leftJoin('pimpinans', 'pimpinan_id', '=', 'pimpinans.id')->where('muhud_id', '=', $category)->select('pimpinan_id', 'nama_pimpinan', 'avatar')->distinct()->get();
-            }, function ($query) {
-                $query->leftJoin('pimpinans', 'pimpinan_id', '=', 'pimpinans.id')->where('muhud_id', '=', 1)->select('pimpinan_id', 'nama_pimpinan', 'avatar')->distinct()->get();
-            })
-            ->get();
-
-        $teks = Shalawat::query()
-            ->when(Request::only('category'), function ($query, $category) {
-                $query->where('muhud_id', '=', $category);
-            }, function ($query) {
-                $query->where('muhud_id', '=', 1);
-            })
-            ->paginate(50)
-            ->through(fn ($shalawat) => [
-                'id' => $shalawat->id,
-                'diwan' => $shalawat->numberOfDiwan,
-                'syarafulAnam' => $shalawat->numberOfMaulidSyarafulAnam,
-                'teks' => $shalawat->text_shalawat,
-                'transliterasi' => $shalawat->transliteration,
-                'terjemahan' => $shalawat->translation_id,
-                'audio' => $shalawat->audio()->where('pimpinan_id', '=', $audioPimpinan)->get(),
-                'love' => auth() ? Like::has($shalawat, auth()->user()) : false,
-            ]);
+            ->when($id, function ($query, $id) {
+                $query->leftJoin('pimpinans', 'pimpinan_id', '=', 'pimpinans.id')->where('muhud_id', '=', $id)->select('pimpinan_id', 'nama_pimpinan', 'avatar')->distinct()->get();
+            })->get();
 
         if (Request::input('search')) {
-            $teks = Shalawat::query()
+            $muhud = Shalawat::query()
                 ->when(Request::input('search'), function ($query, $search) {
                     $query->where('text_shalawat', 'like', '%' . $search . '%');
                     $query->orWhere('transliteration', 'like', '%' . $search . '%');
                     $query->orWhere('translation_id', 'like', '%' . $search . '%');
-                })
-                ->with('audio')
-                ->paginate(10)
-                ->through(fn ($shalawat) => [
+                })->paginate(100)->through(fn ($shalawat) => [
                     'id' => $shalawat->id,
                     'diwan' => $shalawat->numberOfDiwan,
                     'syarafulAnam' => $shalawat->numberOfMaulidSyarafulAnam,
@@ -177,22 +149,74 @@ class UserInteractiveController extends Controller
                     'transliterasi' => $shalawat->transliteration,
                     'terjemahan' => $shalawat->translation_id,
                     'audio' => $shalawat->audio()->where('pimpinan_id', '=', $audioPimpinan)->get(),
-                    'love' => auth() ? Like::has($shalawat, auth()->user()) : false,
+                    'love' => auth() ? Like::has($shalawat, $user) : false,
+                ]);
+        } else {
+            $muhud = Shalawat::query()
+                ->when($id, function ($query, $id) {
+                    $query->where('muhud_id', '=', $id);
+                })->paginate(100)->through(fn ($shalawat) => [
+                    'id' => $shalawat->id,
+                    'diwan' => $shalawat->numberOfDiwan,
+                    'syarafulAnam' => $shalawat->numberOfMaulidSyarafulAnam,
+                    'teks' => $shalawat->text_shalawat,
+                    'transliterasi' => $shalawat->transliteration,
+                    'terjemahan' => $shalawat->translation_id,
+                    'audio' => $shalawat->audio()->where('pimpinan_id', '=', $audioPimpinan)->get(),
+                    'love' => auth() ? Like::has($shalawat, $user) : false,
                 ]);
         }
 
-
         return Inertia::render('Loved', [
-            'filters' => Request::all('search', 'category', 'pimpinan'),
+            'filters' => Request::all('search', 'pimpinan'),
             'kumpulanMuhud' => $kumpulanMuhud,
+            'shalawat' => $muhud,
             'pimpinan' => $pimpinan,
-            'shalawat' => $teks,
+            'id' => $id,
         ]);
     }
 
     public function support()
     {
         return Inertia::render('SupportUs');
+    }
+
+    public function getDetailAudioPimpinan(Request $request)
+    {
+        $pimpinan_id = request()->query('pimpinan_id');
+
+        $raw = Audio::join('muhuds', 'audio.muhud_id', '=', 'muhuds.id')
+            ->select('muhuds.transliteration_id')
+            ->where('audio.pimpinan_id', '=', $pimpinan_id)
+            ->get();
+
+        $data = json_decode($raw, true);
+        // Menghitung jumlah data yang memiliki nilai properti transliteration_id yang sama
+        $countedData = array_count_values(array_map(function ($item) {
+            return $item["transliteration_id"];
+        }, $data));
+
+        // Menggabungkan data menjadi array dengan format yang diinginkan
+        $result = array_map(function ($key, $value) {
+            return ["transliteration_id" => $key, "jumlah" => $value];
+        }, array_keys($countedData), $countedData);
+
+        return response()->json($result, 200);
+    }
+
+    function getRowi($id)
+    {
+
+
+        $pimpinan = Audio::query()
+            ->when($id, function ($query, $id) {
+                $query->leftJoin('pimpinans', 'pimpinan_id', '=', 'pimpinans.id')->where('muhud_id', '=', $id)->select('pimpinan_id', 'nama_pimpinan', 'avatar')->distinct()->get();
+            })->get();
+
+        return Inertia::render('Rowi', [
+            'filters' => Request::all('search', 'pimpinan'),
+            'pimpinan' => $pimpinan,
+        ]);
     }
 
     public function json()
