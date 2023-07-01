@@ -1,7 +1,7 @@
 {
-    "name": "Ishari NU",
-    "short_name": "Ishari NU",
-    "start_url": "/muhud",
+    "name": "ISHARI",
+    "short_name": "ISHARI",
+    "start_url": "/muhud/1",
     "theme_color": "#ffffff",
     "background_color": "#ffffff",
     "display": "standalone",
