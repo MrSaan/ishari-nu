@@ -10,7 +10,7 @@
                     <!-- kanan -->
                     <div class="flex items-center gap-2 group">
                         <div
-                            class="hidden lg:flex mt-1 py-2 px-4 bg-green-600 text-white font-semibold rounded-full items-center h-min">
+                            class="hidden lg:flex mt-1 py-2 px-4 bg-green-600 text-white font-semibold rounded-full items-center h-min dark:bg-green-800">
                             <Link href="/play" class="inline-flex items-center space-x-2">
                             <div>
                                 <PlayIcon class="h-5 w-5" />
@@ -23,7 +23,7 @@
                         <Popover class="relative">
                             <PopoverButton>
                                 <div
-                                    class="flex xl:hidden p-2 bg-green-600 text-white font-semibold rounded-full items-center h-min">
+                                    class="flex xl:hidden p-2 bg-green-600 text-white font-semibold rounded-full items-center h-min dark:bg-green-800">
                                     <span class="sr-only">setting button</span>
                                     <button class="inline-flex space-x-2">
                                         <div>
@@ -34,7 +34,7 @@
                             </PopoverButton>
 
                             <PopoverPanel
-                                class="absolute p-1.5 bg-gray-100 z-10 mt-3 w-screen max-w-xs -translate-x-[11rem] md:-translate-x-8 transform px-4">
+                                class="absolute p-1.5 z-10 mt-3 w-screen -translate-x-1/2 md:-translate-x-8 transform px-4">
                                 <Setting :button="button" @terjemahan="terjemahan" @transliterasi="transliterasi" />
 
                             </PopoverPanel>
@@ -48,7 +48,7 @@
                 <!-- text shalawat -->
                 <Disclosure :defaultOpen="true" v-slot="{ open }">
                     <DisclosureButton>
-                        <div class="pt-8 pb-4 bg-green-400 bg-opacity-20 rounded-lg">
+                        <div class="pt-8 pb-4 bg-green-400 bg-opacity-20 rounded-lg dark:bg-green-800 dark:text-white">
                             <div class="flex flex-col justify-center items-center">
                                 <h6 class="text-sm text-red-400 font-semibold"></h6>
                                 <h5 class="text-base lg:text-xl font-bold font-urdu flex gap-2 items-center">
@@ -66,15 +66,15 @@
                         leave-from-class="transform scale-100 opacity-100" leave-to-class="transform scale-95 opacity-0">
                         <DisclosurePanel>
                             <template v-for="text in syarafulAnam" :key="text.id">
-                                <div class="bg-white rounded-lg p-4 mb-2" :id="text.id">
+                                <div class="bg-white rounded-lg p-4 mb-2 dark:bg-gray-800" :id="text.id">
                                     <div class="flex justify-between items-center">
                                         <h6 class="text-sm text-red-400 font-semibold"></h6>
                                         <h5
-                                            class="text-base lg:text-2xl text-right font-arabic leading-relaxed lg:leading-loose">
+                                            class="text-base lg:text-2xl text-right font-arabic leading-relaxed lg:leading-loose dark:text-gray-200">
                                             {{ text.teks }}
                                         </h5>
                                     </div>
-                                    <div class="flex flex-col">
+                                    <div class="flex flex-col dark:text-gray-300">
                                         <h6 v-if="isTransliterasi" class="text-sm lg:text-base mt-2 italic">{{
                                             text.transliterasi }}</h6>
                                         <p v-if="isTerjemahan"
@@ -83,7 +83,7 @@
                                         </p>
                                     </div>
                                     <div
-                                        class="flex flex-row space-x-2 lg:space-x-3 text-gray-600 mt-2 lg:mt-3 pt-4 border-t-[1px] border-gray-200 items-center">
+                                        class="flex flex-row space-x-2 lg:space-x-3 text-gray-600 mt-2 lg:mt-3 pt-4 border-t-[1px] border-gray-200 items-center dark:text-green-600">
 
                                         <div @click="play(`audioPlay-${text.id}`, text.id)"
                                             class="cursor-pointer hover:text-indigo-600 hover:bg-slate-200 p-1 rounded-full"
@@ -113,7 +113,7 @@
                                         </div>
                                         <div v-if="!text.audio.length == 0">
                                             <select v-model="selected" @change="setAudio(text.id)"
-                                                class="appearance-none form-select block w-32 px-3 py-1.5 text-xs font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
+                                                class="appearance-none form-select block w-32 px-3 py-1.5 text-xs font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none dark:bg-gray-400 dark:border-gray-400 dark:focus:bg-gray-200 dark:text-gray-200 dark:font-semibold">
                                                 <option v-for="audio in text?.audio" :key="audio.id"
                                                     :value="{ id: text.id, audio: audio?.audio_1, referen_audio: audio?.referen_audio }"
                                                     class="text-base">
@@ -140,7 +140,7 @@
 
                 <Disclosure :defaultOpen="true" v-slot="{ open }">
                     <DisclosureButton>
-                        <div class="pt-8 pb-4 bg-green-400 bg-opacity-20 rounded-lg">
+                        <div class="pt-8 pb-4 bg-green-400 bg-opacity-20 rounded-lg dark:bg-green-800 dark:text-white">
                             <div class="flex flex-col justify-center items-center">
                                 <h6 class="text-sm text-red-400 font-semibold"></h6>
                                 <h5 class="text-base lg:text-xl font-bold font-urdu flex items-center gap-2">
@@ -158,24 +158,24 @@
                         leave-from-class="transform scale-100 opacity-100" leave-to-class="transform scale-95 opacity-0">
                         <DisclosurePanel>
                             <template v-for="text in diwan" :key="text.id">
-                                <div class="bg-white rounded-lg p-4 mb-2" :id="text.id">
+                                <div class="bg-white rounded-lg p-4 mb-2 dark:bg-gray-800" :id="text.id">
                                     <div class="flex justify-between items-center">
                                         <h6 class="text-sm text-red-400 font-semibold"></h6>
                                         <h5
-                                            class="text-base lg:text-2xl text-right font-arabic leading-relaxed lg:leading-loose">
+                                            class="text-base lg:text-2xl text-right font-arabic leading-relaxed lg:leading-loose dark:text-gray-200">
                                             {{ text.teks }}
                                         </h5>
                                     </div>
                                     <div class="flex flex-col">
-                                        <h6 v-if="isTransliterasi" class="text-sm lg:text-base mt-2 italic">{{
+                                        <h6 v-if="isTransliterasi" class="text-sm lg:text-base mt-2 italic dark:text-gray-300">{{
                                             text.transliterasi }}</h6>
                                         <p v-if="isTerjemahan"
-                                            class="text-sm lg:text-base lg:font-semibold mt-2 lg:leading-normal">
+                                            class="text-sm lg:text-base lg:font-semibold mt-2 lg:leading-normal dark:text-gray-300">
                                             {{ text.terjemahan }}
                                         </p>
                                     </div>
                                     <div
-                                        class="flex flex-row space-x-2 lg:space-x-3 text-gray-600 mt-2 lg:mt-3 pt-4 border-t-[1px] border-gray-200 items-center">
+                                        class="flex flex-row space-x-2 lg:space-x-3 text-gray-600 mt-2 lg:mt-3 pt-4 border-t-[1px] border-gray-200 items-center dark:text-green-600">
 
                                         <div @click="play(`audioPlay-${text.id}`, text.id)"
                                             class="cursor-pointer hover:text-indigo-600 hover:bg-slate-200 p-1 rounded-full"
@@ -205,7 +205,7 @@
                                         </div>
                                         <div v-if="!text.audio.length == 0">
                                             <select v-model="selected" @change="setAudio(text.id)"
-                                                class="appearance-none form-select block w-20 md:w-40 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
+                                                class="appearance-none form-select block w-20 md:w-40 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none dark:bg-gray-400 dark:border-gray-400 dark:focus:bg-gray-200 dark:text-gray-200 dark:font-semibold">
                                                 <option v-for="audio in text?.audio" :key="audio.id"
                                                     :value="{ audio: audio?.audio_1, referen_audio: audio?.referen_audio }"
                                                     class="text-base">
@@ -319,12 +319,13 @@ let form = useForm({
 
 // function
 function setAudio(param) {
-    this.audio = document.querySelector('#audio')
+    var audio = document.querySelector('#audio')
     track.value = param
-    this.audio.src = '/storage/' + selected.value.audio
+    audio.src = '/storage/' + selected.value.audio
 }
 
 function play(id, button) { //audio play id, button play id, audio file
+    var audio = document.querySelector('#audio')
 
     if (!audio) {
         return alert("kosong")
@@ -334,20 +335,20 @@ function play(id, button) { //audio play id, button play id, audio file
         return alert('pilih audio')
     }
 
-    this.audio.play();
+    audio.play();
     isPlaying.value = id;
 
-    this.buttonPlay = document.querySelector(`#buttonPlay-${button}`);
-    this.buttonPlay.classList.add("text-indigo-600")
+    var buttonPlay = document.querySelector(`#buttonPlay-${button}`);
+    buttonPlay.classList.add("text-indigo-600")
 
-    this.buttonPause = document.querySelector(`#buttonPause-${button}`);
-    if (this.buttonPause) {
-        this.buttonPause.classList.remove("text-indigo-600")
+    var buttonPause = document.querySelector(`#buttonPause-${button}`);
+    if (buttonPause) {
+        buttonPause.classList.remove("text-indigo-600")
     }
 
-    this.audio.onended = function () {
-        this.buttonPlay = document.querySelector(`#buttonPlay-${button}`);
-        this.buttonPlay.classList.remove("text-indigo-600")
+    audio.onended = function () {
+        var buttonPlay = document.querySelector(`#buttonPlay-${button}`);
+        buttonPlay.classList.remove("text-indigo-600")
         isPlaying.value = 0
     }
 
@@ -355,14 +356,14 @@ function play(id, button) { //audio play id, button play id, audio file
 }
 
 function pause(id, button) {
-    // this.audio = document.querySelector('#audio');
-    this.audio.pause();
+    var audio = document.querySelector('#audio');
+    audio.pause();
 
-    this.buttonPlay = document.querySelector(`#buttonPlay-${button}`);
-    this.buttonPlay.classList.remove("text-indigo-600")
+    var buttonPlay = document.querySelector(`#buttonPlay-${button}`);
+    buttonPlay.classList.remove("text-indigo-600")
 
-    this.buttonPause = document.querySelector(`#buttonPause-${button}`);
-    this.buttonPause.classList.add("text-indigo-600")
+    var buttonPause = document.querySelector(`#buttonPause-${button}`);
+    buttonPause.classList.add("text-indigo-600")
 }
 
 function copy(id) {

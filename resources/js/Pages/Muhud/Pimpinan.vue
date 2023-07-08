@@ -2,14 +2,14 @@
     <Listbox as="div">
         <div class="relative mt-1">
             <ListboxButton
-                class="relative flex items-center md:w-60 lg:w-max text-sm w-24 cursor-default rounded-full bg-white py-2 pl-3 pr-10 text-left focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500">
+                class="relative flex items-center md:w-60 lg:w-max text-sm w-32 cursor-default rounded-full bg-white py-2 pl-3 pr-10 text-left focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500">
                 <div v-if="selectedPerson" class="flex items-center">
                     <span class="flex justify-center items-center h-6 w-6 overflow-hidden rounded-full bg-gray-300">
                         <span class="font-thin text-xs text-gray-600">
                             {{ selectedPerson.nama_pimpinan.charAt() }}
                         </span>
                     </span>
-                    <span class="ml-3 md:block truncate hidden">
+                    <span class="ml-3 md:block truncate">
                         {{ selectedPerson.nama_pimpinan }}
                     </span>
                     <span class="pointer-events-none     absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
@@ -22,7 +22,7 @@
                             A
                         </span>
                     </span>
-                    <span class="ml-3 md:block truncate hidden">
+                    <span class="ml-3 md:block truncate">
                         audio
                     </span>
                     <span class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">

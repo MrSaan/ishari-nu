@@ -1,7 +1,7 @@
 <template>
     <header class="flex flex-row mt-2 justify-between bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
         <div class="m-4 flex flex-row justify-items-center space-x-2">
-            <button class="sm:hidden p-2" @click="mobileFiltersOpen = true">
+            <button class="sm:hidden p-2 dark:text-white" @click="mobileFiltersOpen = true">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                     <path fill-rule="evenodd"
                         d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10zm0 5.25a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75a.75.75 0 01-.75-.75z"
@@ -25,7 +25,7 @@
         <div class="m-4 ">
             <Dropdown :align="right">
                 <template #trigger>
-                    <button type="button" class="inline-flex max-w-xs items-center rounded-full text-sm">
+                    <button type="button" class="inline-flex max-w-xs items-center rounded-full text-sm dark:text-white">
                         <span class=" sr-only">Open user menu</span>
                         <div v-if="$page.props.auth.user == null" class="flex items-center">
                             <img class="h-8 w-8 rounded-full"
@@ -47,12 +47,12 @@
                 </template>
 
                 <template #content>
-                    <div v-if="$page.props.auth.user == null">
+                    <div v-if="$page.props.auth.user == null" class="dark:bg-gray-900 dark:text-white">
                         <DropdownLink :href="route('login')" method="get" as="button">Login</DropdownLink>
                         <DropdownLink :href="route('register')" method="get" as="button">Register
                         </DropdownLink>
                     </div>
-                    <div v-else>
+                    <div v-else >
                         <DropdownLink v-if="user.role === 'admin'" :href="route('admin')" method="get" as="button">Admin
                         </DropdownLink>
                         <DropdownLink :href="route('profile')" method="get" as="button">Profile
@@ -80,7 +80,7 @@
                     leave="transition ease-in-out duration-300 transform" leave-from="translate-x-0"
                     leave-to="translate-x-full">
                     <DialogPanel
-                        class="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-12 shadow-xl">
+                        class="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-12 shadow-xl dark:bg-gray-900">
                         <div class="flex items-center justify-between px-4">
                             <h2 class="text-lg font-medium text-gray-900">Ishari</h2>
                             <button type="button"

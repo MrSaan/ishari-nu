@@ -4,7 +4,7 @@
             <div class="hidden sm:mb-8 sm:flex sm:justify-center">
                 <div
                     class="relative overflow-hidden rounded-full py-1.5 px-4 text-sm leading-6 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-                    <span class="text-gray-600">
+                    <span class="text-gray-600 dark:text-gray-300">
                         Support kami untuk menyajikan konten yang lebih baik.
                         <Link href="/support" class="font-semibold text-green-600"><span class="absolute inset-0"
                             aria-hidden="true" />Read more <span aria-hidden="true">&rarr;</span>
@@ -13,25 +13,25 @@
                 </div>
             </div>
             <div>
-                <h1 class="text-4xl font-bold tracking-tight sm:text-center sm:text-6xl">
+                <h1 class="text-4xl font-bold tracking-tight sm:text-center sm:text-6xl dark:text-gray-200">
                     Ikatan Seni Hadrah Indonesia
                 </h1>
-                <p class="mt-6 sm:text-lg text-base leading-8 text-gray-600 italic sm:text-center">
+                <p class="mt-6 sm:text-lg text-base leading-8 text-gray-600 italic sm:text-center dark:text-gray-300">
                     Mendengarkan dan membaca shalawat ISHARI.
                 </p>
-                <p class="text-lg leading-8 text-gray-600 sm:text-center">
+                <p class="text-lg leading-8 text-gray-600 sm:text-center dark:text-gray-400">
                     "Sesungguhnya Allah dan para malaikat-Nya bersalawat untuk Nabi. Wahai orang-orang yang
                     beriman! Bersalawatlah kamu untuk Nabi dan ucapkanlah salam dengan penuh penghormatan
                     kepadanya.” (QS. Al-Ahzab [33]: 56)
                 </p>
                 <div class="mt-8 flex gap-x-4 sm:justify-center">
                     <Link href="/muhud/1"
-                        class="inline-block rounded-lg bg-green-500 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-green-600 hover:bg-green-700 hover:ring-green-700">
+                        class="inline-block rounded-lg bg-green-500 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-green-600 hover:bg-green-700 hover:ring-green-700 dark:bg-green-600">
                     Get started
                     <span class="text-green-200" aria-hidden="true">&rarr;</span>
                     </Link>
                     <Link href="/support"
-                        class="inline-block rounded-lg px-4 py-1.5 text-base font-semibold leading-7 text-gray-900 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
+                        class="inline-block rounded-lg px-4 py-1.5 text-base font-semibold leading-7 text-gray-900 ring-1 ring-gray-900/10 hover:ring-gray-900/20 dark:bg-gray-200">
                     About Us
                     <span class="text-gray-400" aria-hidden="true">&rarr;</span>
                     </Link>

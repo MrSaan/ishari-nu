@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Audio;
 use App\Models\Muhud;
 use App\Models\Pimpinan;
+use App\Models\Rowi;
+use App\Models\RowiAudio;
 use App\Models\Shalawat;
 use App\Models\Songs;
 use Illuminate\Support\Facades\Auth;
@@ -207,15 +209,32 @@ class UserInteractiveController extends Controller
     function getRowi($id)
     {
 
+        $user = Auth::user();
+        $audioPimpinan = Request::only('pimpinan');
 
-        $pimpinan = Audio::query()
+        $pimpinan = RowiAudio::query()
             ->when($id, function ($query, $id) {
                 $query->leftJoin('pimpinans', 'pimpinan_id', '=', 'pimpinans.id')->where('muhud_id', '=', $id)->select('pimpinan_id', 'nama_pimpinan', 'avatar')->distinct()->get();
             })->get();
 
+        $teks_rowi = Rowi::query()
+            ->when($id, function ($query, $id) {
+                $query->where('muhud_id', '=', $id);
+            })
+            ->get();
+            // ->paginate(100)->through(fn ($shalawat) => [
+            //     'id' => $shalawat->id,
+            //     'teks' => $shalawat->text_rowi,
+            //     'transliterasi' => $shalawat->transliteration,
+            //     'terjemahan' => $shalawat->translation_id,
+            //     // 'audio' => $shalawat->rowiAudio()->where('pimpinan_id', '=', $audioPimpinan)->get(),
+            // ]);
+
+
         return Inertia::render('Rowi', [
             'filters' => Request::all('search', 'pimpinan'),
             'pimpinan' => $pimpinan,
+            'rowi' => $teks_rowi,
         ]);
     }
 

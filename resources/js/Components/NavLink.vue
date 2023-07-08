@@ -1,5 +1,5 @@
 <template>
-    <Link class="flex items-center px-4 py-2 mt-1 dark:bg-gray-800 dark:text-gray-200"
+    <Link class="flex items-center px-4 py-2 mt-1 dark:text-gray-200"
         :class="{ 'text-white bg-green-600 md:rounded-md': active }">
     <slot />
     </Link>

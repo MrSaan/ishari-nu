@@ -50,7 +50,7 @@
                 <!-- text shalawat -->
                 <Disclosure :defaultOpen="true" v-slot="{ open }">
                     <DisclosureButton>
-                        <div class="pt-8 pb-4 bg-green-400 bg-opacity-20 rounded-lg">
+                        <div class="pt-8 pb-4 bg-green-400 bg-opacity-20 rounded-lg dark:bg-green-800">
                             <div class="flex flex-col justify-center items-center">
                                 <h6 class="text-sm text-red-400 font-semibold"></h6>
                                 <h5 class="text-base lg:text-xl font-bold font-urdu flex items-center gap-2">
@@ -68,17 +68,17 @@
                         leave-from-class="transform scale-100 opacity-100" leave-to-class="transform scale-95 opacity-0">
                         <DisclosurePanel>
                             <template v-for="text in syarafulAnam" :key="text.id">
-                                <div v-if="text.love" class="bg-white rounded-lg p-4 mb-2" :id="text.id">
+                                <div v-if="text.love" class="bg-white rounded-lg p-4 mb-2 dark:bg-gray-800" :id="text.id">
                                     <div class="flex justify-between items-center">
                                         <h6 class="text-sm text-red-400 font-semibold"></h6>
                                         <h5
-                                            class="text-base lg:text-2xl text-right font-arabic leading-relaxed lg:leading-loose">
+                                            class="text-base lg:text-2xl text-right font-arabic leading-relaxed lg:leading-loose dark:text-gray-200">
                                             {{
                                                 text.teks
                                             }}
                                         </h5>
                                     </div>
-                                    <div class="flex flex-col">
+                                    <div class="flex flex-col dark:text-gray-300">
                                         <h6 v-if="isTransliterasi" class="text-sm lg:text-base mt-2 italic">{{ text.transliterasi }}</h6>
                                         <p v-if="isTerjemahan" class="text-sm lg:text-base lg:font-semibold mt-2 lg:leading-normal">{{
                                             text.terjemahan
@@ -86,7 +86,7 @@
                                         </p>
                                     </div>
                                     <div
-                                        class="flex flex-row space-x-2 lg:space-x-3 text-gray-600 mt-2 lg:mt-3 pt-4 border-t-[1px] border-gray-200 items-center">
+                                        class="flex flex-row space-x-2 lg:space-x-3 text-gray-600 mt-2 lg:mt-3 pt-4 border-t-[1px] border-gray-200 items-center dark:text-green-600">
 
                                         <div @click="play(`audioPlay-${text.id}`, text.id)"
                                             class="cursor-pointer hover:text-indigo-600 hover:bg-slate-200 p-1 rounded-full"
@@ -141,7 +141,7 @@
 
                 <Disclosure :defaultOpen="true" v-slot="{ open }">
                     <DisclosureButton>
-                        <div class="pt-8 pb-4 bg-green-400 bg-opacity-20 rounded-lg">
+                        <div class="pt-8 pb-4 bg-green-400 bg-opacity-20 rounded-lg dark:bg-green-800">
                             <div class="flex flex-col justify-center items-center">
                                 <h6 class="text-sm text-red-400 font-semibold"></h6>
                                 <h5 class="text-base lg:text-xl font-bold font-urdu flex items-center gap-2">
@@ -159,17 +159,17 @@
                         leave-from-class="transform scale-100 opacity-100" leave-to-class="transform scale-95 opacity-0">
                         <DisclosurePanel>
                             <template v-for="text in diwan" :key="text.id">
-                                <div v-if="text.love" class="bg-white rounded-lg p-4 mb-2" :id="text.id">
+                                <div v-if="text.love" class="bg-white rounded-lg p-4 mb-2 dark:bg-gray-800" :id="text.id">
                                     <div class="flex justify-between items-center">
                                         <h6 class="text-sm text-red-400 font-semibold"></h6>
                                         <h5
-                                            class="text-base lg:text-2xl text-right font-arabic leading-relaxed lg:leading-loose">
+                                            class="text-base lg:text-2xl text-right font-arabic leading-relaxed lg:leading-loose dark:text-gray-200">
                                             {{
                                                 text.teks
                                             }}
                                         </h5>
                                     </div>
-                                    <div class="flex flex-col">
+                                    <div class="flex flex-col dark:text-gray-300">
                                         <h6 v-if="isTransliterasi" class="text-sm lg:text-base mt-2 italic">{{ text.transliterasi }}</h6>
                                         <p v-if="isTerjemahan" class="text-sm lg:text-base lg:font-semibold mt-2 lg:leading-normal">{{
                                             text.terjemahan
@@ -177,7 +177,7 @@
                                         </p>
                                     </div>
                                     <div
-                                        class="flex flex-row space-x-2 lg:space-x-3 text-gray-600 mt-2 lg:mt-3 pt-4 border-t-[1px] border-gray-200 items-center">
+                                        class="flex flex-row space-x-2 lg:space-x-3 text-gray-600 mt-2 lg:mt-3 pt-4 border-t-[1px] border-gray-200 items-center dark:text-green-600">
 
                                         <div @click="play(`audioPlay-${text.id}`, text.id)"
                                             class="cursor-pointer hover:text-indigo-600 hover:bg-slate-200 p-1 rounded-full"
@@ -315,12 +315,13 @@ let form = useForm({
 
 // function
 function setAudio(param) {
-    this.audio = document.querySelector('#audio')
+    var audio = document.querySelector('#audio')
     track.value = param
-    this.audio.src = '/storage/' + selected.value.audio
+    audio.src = '/storage/' + selected.value.audio
 }
 
 function play(id, button) { //audio play id, button play id, audio file
+    var audio = document.querySelector('#audio')
 
     if (!audio) {
         return alert("kosong")
@@ -329,20 +330,20 @@ function play(id, button) { //audio play id, button play id, audio file
         return alert('pilih audio')
     }
 
-    this.audio.play();
+    audio.play();
     isPlaying.value = id;
 
-    this.buttonPlay = document.querySelector(`#buttonPlay-${button}`);
-    this.buttonPlay.classList.add("text-indigo-600")
+    var buttonPlay = document.querySelector(`#buttonPlay-${button}`);
+    buttonPlay.classList.add("text-indigo-600")
 
-    this.buttonPause = document.querySelector(`#buttonPause-${button}`);
-    if (this.buttonPause) {
-        this.buttonPause.classList.remove("text-indigo-600")
+    var buttonPause = document.querySelector(`#buttonPause-${button}`);
+    if (buttonPause) {
+        buttonPause.classList.remove("text-indigo-600")
     }
 
-    this.audio.onended = function () {
-        this.buttonPlay = document.querySelector(`#buttonPlay-${button}`);
-        this.buttonPlay.classList.remove("text-indigo-600")
+    audio.onended = function () {
+        var buttonPlay = document.querySelector(`#buttonPlay-${button}`);
+        buttonPlay.classList.remove("text-indigo-600")
         isPlaying.value = 0
     }
 
@@ -350,14 +351,15 @@ function play(id, button) { //audio play id, button play id, audio file
 }
 
 function pause(id, button) {
-    // this.audio = document.querySelector(`#${id}`);
-    this.audio.pause();
+    // var audio = document.querySelector(`#${id}`);
+    var audio = document.querySelector('#audio')
+    audio.pause();
 
-    this.buttonPlay = document.querySelector(`#buttonPlay-${button}`);
-    this.buttonPlay.classList.remove("text-indigo-600")
+    var buttonPlay = document.querySelector(`#buttonPlay-${button}`);
+    buttonPlay.classList.remove("text-indigo-600")
 
-    this.buttonPause = document.querySelector(`#buttonPause-${button}`);
-    this.buttonPause.classList.add("text-indigo-600")
+    var buttonPause = document.querySelector(`#buttonPause-${button}`);
+    buttonPause.classList.add("text-indigo-600")
 }
 
 function copy(id) {

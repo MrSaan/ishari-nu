@@ -1,6 +1,9 @@
 <!-- This example requires Tailwind CSS v3.0+ -->
 <template>
-    <div class="isolate bg-white">
+    <div class="isolate bg-white dark:bg-gray-900">
+        <div>
+            <Banner />
+        </div>
         <!-- gradient warna -->
         <div class="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]">
             <svg class="relative left-[calc(50%-11rem)] -z-10 h-[21.1875rem] max-w-none -translate-x-1/2 rotate-[30deg] sm:left-[calc(50%-30rem)] sm:h-[42.375rem]"
@@ -29,7 +32,7 @@
                     <!-- mobile button -->
                     <div class="flex lg:hidden">
                         <button type="button"
-                            class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                            class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 dark:text-gray-200"
                             @click="mobileMenuOpen = true">
                             <span class="sr-only">Open main menu</span>
                             <Bars3Icon class="h-6 w-6" aria-hidden="true" />
@@ -39,7 +42,7 @@
                     <!-- navigation -->
                     <div class="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-center lg:gap-x-12">
                         <Link v-for="item in navigation" :key="item.name" :href="item.href"
-                            class="font-semibold text-gray-900 hover:text-green-600 hover:underline hover:underline-offset-4">
+                            class="font-semibold text-gray-900 hover:text-green-600 hover:underline hover:underline-offset-4 dark:text-gray-200">
                         {{
                             item.name
                         }}</Link>
@@ -56,14 +59,14 @@
                 </nav>
                 <!-- mobile menu -->
                 <Dialog as="div" @close="mobileMenuOpen = false" :open="mobileMenuOpen">
-                    <DialogPanel focus="true" class="fixed inset-0 z-10 overflow-y-auto bg-white px-6 py-6 lg:hidden">
+                    <DialogPanel focus="true" class="fixed inset-0 z-10 overflow-y-auto bg-white px-6 py-6 lg:hidden dark:bg-gray-900">
                         <div class="flex h-9 items-center justify-between">
                             <div class="flex">
-                                <a href="#" class="-m-1.5 p-1.5">
+                                <!-- <a href="#" class="-m-1.5 p-1.5">
                                     <span class="sr-only">Your Company</span>
-                                    <img class="h-8"
-                                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
-                                </a>
+                                    <img class="h-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                                        alt="" />
+                                </a> -->
                             </div>
                             <div class="flex">
                                 <button type="button"
@@ -78,7 +81,7 @@
                             <div class="-my-6 divide-y divide-gray-500/10">
                                 <div class="space-y-2 py-6">
                                     <a v-for="item in navigation" :key="item.name" :href="item.href"
-                                        class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10">
+                                        class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10 dark:text-gray-200">
                                         {{ item.name }}
                                     </a>
                                 </div>
@@ -99,7 +102,7 @@
             <div class="relative px-6 lg:px-8">
                 <HeroSection />
                 <Testimonial />
-                <!-- <Thanks /> -->
+                <Thanks />
                 <CallToAction />
             </div>
             <div class="relative max-w-6xl mx-auto pt-10 xl:pt-0 mt-10 xl:mt-2">
@@ -123,6 +126,7 @@ import CallToAction from '@/Pages/Overview/CallToAction.vue';
 import Feature from '@/Pages/Overview/Feature.vue';
 import Footer from '@/Components/Footer.vue';
 import ContactUs from '@/Components/ContactUs.vue';
+import Banner from '../Components/BannerHomepage.vue';
 import Thanks from './Overview/Thanks.vue';
 import { computed, ref } from 'vue'
 import { Bars3Icon, XMarkIcon, ExclamationTriangleIcon } from '@heroicons/vue/24/outline'

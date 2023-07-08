@@ -2,7 +2,7 @@
     <!-- CTA -->
     <div class="max-w-6xl mx-auto">
         <div class="md:w-2/3 lg:w-1/2 lg:mt-20 mt-16">
-            <h2 class="my-8 text-2xl font-bold text-gray-700 dark:text-white md:text-4xl">
+            <h2 class="my-8 text-2xl font-bold text-gray-700 md:text-4xl dark:text-gray-200">
                 ISHARI adalah Amaliyah Thariqah & Budaya Ulama Nusantara NU
             </h2>
             <p class="text-gray-600 dark:text-gray-300">

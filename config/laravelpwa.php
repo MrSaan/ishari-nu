@@ -3,9 +3,9 @@
 return [
     'name' => 'LaravelPWA',
     'manifest' => [
-        'name' => env('APP_NAME', 'ISHARI NU'),
+        'name' => env('APP_NAME', 'ISHARI'),
         'short_name' => 'ishari',
-        'start_url' => '',
+        'start_url' => '/muhud/1',
         'background_color' => '#ffffff',
         'theme_color' => '#000000',
         'display' => 'standalone',

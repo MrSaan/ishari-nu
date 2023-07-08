@@ -1,6 +1,6 @@
 <template>
     <div class="container px-6 py-10 mx-auto">
-        <h1 class="text-3xl font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white">Jelajahi
+        <h1 class="text-3xl font-semibold text-gray-800 capitalize lg:text-4xl dark:text-gray-200">Jelajahi
             berbagai macam <br><span class="underline decoration-green-500">fitur menarik</span>
         </h1>
 
@@ -11,7 +11,7 @@
         <div class="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-16 md:grid-cols-2 xl:grid-cols-3">
             <div class="space-y-3">
                 <span
-                    class="inline-block p-3 text-green-500 bg-green-100 rounded-full dark:text-white dark:bg-green-500">
+                    class="inline-block p-3 text-green-500 bg-green-100 rounded-full dark:text-white dark:bg-green-600">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -31,7 +31,7 @@
 
             <div class="space-y-3">
                 <span
-                    class="inline-block p-3 text-green-500 bg-green-100 rounded-full dark:text-white dark:bg-green-500">
+                    class="inline-block p-3 text-green-500 bg-green-100 rounded-full dark:text-white dark:bg-green-600">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -52,7 +52,7 @@
 
             <div class="space-y-3">
                 <span
-                    class="inline-block p-3 text-green-500 bg-green-100 rounded-full dark:text-white dark:bg-green-500">
+                    class="inline-block p-3 text-green-500 bg-green-100 rounded-full dark:text-white dark:bg-green-600">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

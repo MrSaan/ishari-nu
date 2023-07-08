@@ -73,7 +73,7 @@ const submit = () => {
                 <span class="w-1/5 border-b dark:border-gray-600 lg:w-1/5"></span>
 
                 <a href="#" class="text-xs text-center text-gray-500 uppercase dark:text-gray-400 hover:underline">
-                    or login with Social Media
+                    Masuk dengan akun Sosial Media
                 </a>
 
                 <span class="w-1/5 border-b dark:border-gray-400 lg:w-1/5"></span>
@@ -88,12 +88,12 @@ const submit = () => {
                         </path>
                     </svg>
 
-                    <span class="hidden mx-2 sm:inline">Sign in with Google</span>
+                    <span class="mx-2 sm:inline">Masuk dengan akun Google</span>
                 </a>
             </div>
 
-            <p class="mt-8 text-xs font-light text-center text-gray-400"> Don't have an account?
-                <Link href="/register" class="font-medium text-gray-700 dark:text-gray-200 hover:underline">Create One
+            <p class="mt-8 text-xs font-light text-center text-gray-400"> Tidak punya aku?
+                <Link href="/register" class="font-medium text-gray-700 hover:underline">Buat disini
                 </Link>
             </p>
 
