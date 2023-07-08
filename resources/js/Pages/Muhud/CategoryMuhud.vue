@@ -21,7 +21,7 @@
                 <template #content>
                     <DropdownLink :href="`/${props.category}/${muhud.id}`" method="get"
                         v-for="muhud in kumpulanMuhud" :key="muhud.id"
-                        class="block w-full px-4 py-2 text-sm text-left leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out  dark:text-white dark:bg-gray-900 dark:hover:bg-green-800 dark:text-gray-200">
+                        class="block w-full px-4 py-2 text-sm text-left leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out dark:bg-gray-900 dark:hover:bg-green-800 dark:text-gray-200">
                         {{ muhud.transliteration_id }}
                     </DropdownLink>
                 </template>
