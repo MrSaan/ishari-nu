@@ -1,6 +1,6 @@
 <template>
     <div
-        class="fixed w-60 lg:w-72 h-screen hidden sm:flex flex-col px-4 py-8 bg-white border-r dark:bg-gray-900 dark:border-gray-700">
+        class="fixed w-60 lg:w-72 h-screen hidden md:flex flex-col px-4 py-8 bg-white border-r dark:bg-gray-900 dark:border-gray-700">
         <div class="flex flex-row items-center">
             <div class="text-gray-300 mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10">
@@ -12,7 +12,7 @@
             <h2 class="text-3xl font-bold text-gray-800 dark:text-white">Diwan v.1</h2>
         </div>
 
-        <div class="flex flex-col justify-between text-slate-800 flex-1 mt-6">
+        <div class="overflow-auto flex flex-col justify-between text-slate-800 flex-1 mt-6">
             <Nav />
         </div>
     </div>

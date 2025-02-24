@@ -2,7 +2,7 @@
     <Listbox as="div">
         <div class="relative mt-1">
             <ListboxButton
-                class="relative flex items-center md:w-60 lg:w-max text-sm w-32 cursor-default rounded-full bg-white py-2 pl-3 pr-10 text-left focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500">
+                class="relative flex items-center md:w-60 lg:w-max text-sm w-40 cursor-default rounded-full bg-white py-2 pl-3 pr-10 text-left focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500">
                 <div v-if="selectedPerson" class="flex items-center">
                     <span class="flex justify-center items-center h-6 w-6 overflow-hidden rounded-full bg-gray-300">
                         <span class="font-thin text-xs text-gray-600">
@@ -12,7 +12,7 @@
                     <span class="ml-3 md:block truncate">
                         {{ selectedPerson.nama_pimpinan }}
                     </span>
-                    <span class="pointer-events-none     absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
+                    <span class="pointer-events-none absolute inset-y-0 right-0 ml-4 flex items-center pr-1">
                         <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
                     </span>
                 </div>
@@ -68,7 +68,7 @@
 <script setup>
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { Link } from '@inertiajs/inertia-vue3';
 import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid'
@@ -78,9 +78,10 @@ let props = defineProps({
     filter: Object,
 })
 
-let right = ref('right')
-const selectedPerson = computed(() => {
-    return props.pimpinan.find((item) => item.pimpinan_id === parseInt(props.filter.pimpinan));
+let id = ref(Number(props.filter.pimpinan))
+
+let selectedPerson = computed(() => {
+    return props.pimpinan.find((item) => item.pimpinan_id === id.value);
 })
 // const selectedPerson = ref(props.pimpinan[0])
 

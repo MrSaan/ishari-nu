@@ -1,7 +1,7 @@
 <template>
     <header class="flex flex-row mt-2 justify-between bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
         <div class="m-4 flex flex-row justify-items-center space-x-2">
-            <button class="sm:hidden p-2 dark:text-white" @click="mobileFiltersOpen = true">
+            <button class="md:hidden p-2 dark:text-white" @click="mobileFiltersOpen = true">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                     <path fill-rule="evenodd"
                         d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10zm0 5.25a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75a.75.75 0 01-.75-.75z"
@@ -23,7 +23,7 @@
 
         <!-- Dropdown -->
         <div class="m-4 ">
-            <Dropdown :align="right">
+            <!-- <Dropdown :align="right">
                 <template #trigger>
                     <button type="button" class="inline-flex max-w-xs items-center rounded-full text-sm dark:text-white">
                         <span class=" sr-only">Open user menu</span>
@@ -31,7 +31,7 @@
                             <img class="h-8 w-8 rounded-full"
                                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                                 alt="">
-                            <span class="flex pl-3 font-semibold">Guest</span>
+                            <span class="flex pl-3 hidden">Guest</span>
                         </div>
                         <div v-else class="flex items-center">
                             <img v-if="user.avatar" class="h-8 w-8 rounded-full" :src="`/storage/${user.avatar}`"
@@ -61,7 +61,7 @@
                         </DropdownLink>
                     </div>
                 </template>
-            </Dropdown>
+            </Dropdown> -->
         </div>
         <!-- end Dropdown -->
     </header>

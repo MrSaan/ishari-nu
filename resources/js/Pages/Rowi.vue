@@ -47,7 +47,7 @@
             <!-- text shalawat -->
             <Disclosure :defaultOpen="true" v-slot="{ open }">
                 <DisclosureButton>
-                    <div class="pt-8 pb-4 bg-green-400 bg-opacity-20 rounded-lg dark:bg-green-800">
+                    <div class="pt-8 pb-4 bg-green-400 bg-opacity-20 rounded-lg dark:bg-green-800 mx-2">
                         <div class="flex flex-col justify-center items-center">
                             <h6 class="text-sm text-red-400 font-semibold"></h6>
                             <h5 class="text-base lg:text-xl font-bold font-urdu flex gap-2 items-center">
@@ -65,11 +65,11 @@
                     leave-to-class="transform scale-95 opacity-0">
                     <DisclosurePanel>
                         <template v-for="text in rowi">
-                            <div class="bg-white rounded-lg p-4 mb-2 dark:bg-gray-800">
+                            <div class="bg-white rounded-lg p-4 mb-2 dark:bg-gray-800 mx-2">
                                 <div class="flex justify-between items-center">
                                     <h6 class="text-sm text-red-400 font-semibold"></h6>
                                     <h5
-                                        class="text-base lg:text-2xl text-right font-arabic leading-relaxed lg:leading-loose dark:text-gray-200">
+                                        class="text-2xl text-right font-arabic leading-[3.5rem] lg:leading-loose dark:text-gray-200">
                                         {{ text.text_rowi }}
                                     </h5>
                                 </div>

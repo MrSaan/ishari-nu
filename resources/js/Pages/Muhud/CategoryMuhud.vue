@@ -1,13 +1,13 @@
 <template>
     <div class="flex flex-row space-x-2">
-        <div class="p-2 bg-white rounded-full h-min">
+        <!-- <div class="p-2 bg-white rounded-full h-min">
             <ArrowLeftIcon class="h-4 w-4" />
-        </div>
-        <div class="flex flex-col">
+        </div> -->
+        <div class="flex flex-col pl-2">
             <Dropdown v-model="choiceFasal">
                 <template #trigger>
                     <div class="inline-flex items-center space-x-2 dark:text-white">
-                        <h6 class="text-sm lg:text-xl font-semibold">{{ choiceFasal.transliteration_id }}
+                        <h6 class="text-lg lg:text-2xl font-semibold">{{ choiceFasal.transliteration_id }}
                         </h6>
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

@@ -7,7 +7,7 @@
         <div class="md:pl-60 lg:pl-72 w-full min-h-screen dark:bg-gray-900 dark:border-gray-700">
             <!-- content in here -->
             <BannerHomepage />
-            <div class="md:mx-7">
+            <div class="sm:mx-7">
                 <section class="max-w-6xl mx-auto">
                     <slot></slot>
                 </section>

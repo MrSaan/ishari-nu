@@ -19,7 +19,9 @@ class UserInteractiveController extends Controller
 {
     public function getCategoryMuhud($id)
     {
-        $user = Auth::user();
+        if (auth()) {
+            $user = Auth::user();
+        }
         $kumpulanMuhud = Muhud::all();
         $audioPimpinan = Request::only('pimpinan');
 
@@ -42,22 +44,40 @@ class UserInteractiveController extends Controller
                     'transliterasi' => $shalawat->transliteration,
                     'terjemahan' => $shalawat->translation_id,
                     'audio' => $shalawat->audio()->where('pimpinan_id', '=', $audioPimpinan)->get(),
-                    'love' => auth() ? Like::has($shalawat, $user) : false,
+                    // 'love' => auth() ? Like::has($shalawat, $user) : false,
+                    'love' => null,
                 ]);
         } else {
-            $muhud = Shalawat::query()
-                ->when($id, function ($query, $id) {
-                    $query->where('muhud_id', '=', $id);
-                })->paginate(100)->through(fn ($shalawat) => [
-                    'id' => $shalawat->id,
-                    'diwan' => $shalawat->numberOfDiwan,
-                    'syarafulAnam' => $shalawat->numberOfMaulidSyarafulAnam,
-                    'teks' => $shalawat->text_shalawat,
-                    'transliterasi' => $shalawat->transliteration,
-                    'terjemahan' => $shalawat->translation_id,
-                    'audio' => $shalawat->audio()->where('pimpinan_id', '=', $audioPimpinan)->get(),
-                    'love' => auth() ? Like::has($shalawat, $user) : false,
-                ]);
+
+            if (Auth::check()) {
+                $muhud = Shalawat::query()
+                    ->when($id, function ($query, $id) {
+                        $query->where('muhud_id', '=', $id);
+                    })->paginate(100)->through(fn ($shalawat) => [
+                        'id' => $shalawat->id,
+                        'diwan' => $shalawat->numberOfDiwan,
+                        'syarafulAnam' => $shalawat->numberOfMaulidSyarafulAnam,
+                        'teks' => $shalawat->text_shalawat,
+                        'transliterasi' => $shalawat->transliteration,
+                        'terjemahan' => $shalawat->translation_id,
+                        'audio' => $shalawat->audio()->where('pimpinan_id', '=', $audioPimpinan)->get(),
+                        'love' => auth() ? Like::has($shalawat, $user) : false,
+                    ]);
+            } else {
+                $muhud = Shalawat::query()
+                    ->when($id, function ($query, $id) {
+                        $query->where('muhud_id', '=', $id);
+                    })->paginate(100)->through(fn ($shalawat) => [
+                        'id' => $shalawat->id,
+                        'diwan' => $shalawat->numberOfDiwan,
+                        'syarafulAnam' => $shalawat->numberOfMaulidSyarafulAnam,
+                        'teks' => $shalawat->text_shalawat,
+                        'transliterasi' => $shalawat->transliteration,
+                        'terjemahan' => $shalawat->translation_id,
+                        'audio' => $shalawat->audio()->where('pimpinan_id', '=', $audioPimpinan)->get(),
+                        'love' => null,
+                    ]);
+            }
         }
 
         return Inertia::render('Muhud', [
@@ -222,13 +242,13 @@ class UserInteractiveController extends Controller
                 $query->where('muhud_id', '=', $id);
             })
             ->get();
-            // ->paginate(100)->through(fn ($shalawat) => [
-            //     'id' => $shalawat->id,
-            //     'teks' => $shalawat->text_rowi,
-            //     'transliterasi' => $shalawat->transliteration,
-            //     'terjemahan' => $shalawat->translation_id,
-            //     // 'audio' => $shalawat->rowiAudio()->where('pimpinan_id', '=', $audioPimpinan)->get(),
-            // ]);
+        // ->paginate(100)->through(fn ($shalawat) => [
+        //     'id' => $shalawat->id,
+        //     'teks' => $shalawat->text_rowi,
+        //     'transliterasi' => $shalawat->transliteration,
+        //     'terjemahan' => $shalawat->translation_id,
+        //     // 'audio' => $shalawat->rowiAudio()->where('pimpinan_id', '=', $audioPimpinan)->get(),
+        // ]);
 
 
         return Inertia::render('Rowi', [

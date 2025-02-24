@@ -70,7 +70,7 @@
                                     <div class="flex justify-between items-center">
                                         <h6 class="text-sm text-red-400 font-semibold"></h6>
                                         <h5
-                                            class="text-base lg:text-2xl text-right font-arabic leading-relaxed lg:leading-loose dark:text-gray-200">
+                                            class="text-2xl text-right font-amiri leading-[3.5rem] lg:leading-loose dark:text-gray-200">
                                             {{ text.teks }}
                                         </h5>
                                     </div>
@@ -98,7 +98,14 @@
                                             <span class="sr-only">Button Pause</span>
                                             <PauseIcon class="w-5 h-5" />
                                         </div>
-                                        <form @submit.prevent="submit(text.id)">
+                                        <div v-if="$page.props.auth.user == null" @click="login">
+                                            <button
+                                                class="cursor-pointer hover:text-indigo-600 hover:bg-slate-200 p-1 rounded-full">
+                                                <span class="sr-only">Button Love</span>
+                                                <HeartIcon class="w-5 h-5" />
+                                            </button>
+                                        </div>
+                                        <form v-else @submit.prevent="submit(text.id)">
                                             <button type="submit"
                                                 class="cursor-pointer hover:text-indigo-600 hover:bg-slate-200 p-1 rounded-full"
                                                 :class="[text.love ? 'text-rose-600 bg-rose-100' : '']">
@@ -162,13 +169,14 @@
                                     <div class="flex justify-between items-center">
                                         <h6 class="text-sm text-red-400 font-semibold"></h6>
                                         <h5
-                                            class="text-base lg:text-2xl text-right font-arabic leading-relaxed lg:leading-loose dark:text-gray-200">
+                                            class="text-2xl text-right font-amiri leading-[3.5rem] lg:leading-loose dark:text-gray-200">
                                             {{ text.teks }}
                                         </h5>
                                     </div>
                                     <div class="flex flex-col">
-                                        <h6 v-if="isTransliterasi" class="text-sm lg:text-base mt-2 italic dark:text-gray-300">{{
-                                            text.transliterasi }}</h6>
+                                        <h6 v-if="isTransliterasi"
+                                            class="text-sm lg:text-base mt-2 italic dark:text-gray-300">{{
+                                                text.transliterasi }}</h6>
                                         <p v-if="isTerjemahan"
                                             class="text-sm lg:text-base lg:font-semibold mt-2 lg:leading-normal dark:text-gray-300">
                                             {{ text.terjemahan }}
@@ -289,10 +297,10 @@ function dataDisplay() {
 
 // hide element
 const button = ref({
-    isTerjemahan: true,
+    isTerjemahan: false,
     isTransliterasi: true,
 })
-const isTerjemahan = ref(true)
+const isTerjemahan = ref(false)
 function terjemahan(value) {
     isTerjemahan.value = value
     button.value.isTerjemahan = value
@@ -393,5 +401,9 @@ let submit = (value) => {
         preserveState: true,
         preserveScroll: true
     })
+}
+
+const login = () => {
+    alert("Tindakan ini perlu Login terlebih dahulu");
 }
 </script>

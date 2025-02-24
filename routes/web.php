@@ -38,7 +38,7 @@ Route::get('/support', [UserInteractiveController::class, 'support']);
 //     return Inertia::render('Dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware('guest')->group(function () {
     Route::get('/muhud/{id}', [UserInteractiveController::class, 'getCategoryMuhud']);
     Route::get('/reciters', [UserInteractiveController::class, 'reciters'])->name('reciters');
     Route::get('/play', [UserInteractiveController::class, 'Musics'])->name('music');

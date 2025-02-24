@@ -25,10 +25,10 @@
         <div
             class="flex flex-col lg:max-w-sm rounded-lg bg-green-400 lg:pb-24 md:pt-10 justify-end text-xl font-bold p-4 lg:pl-6 tracking-tight text-green-800 sm:text-4xl dark:bg-green-600">
             <span class="block">Baca dan Dengarkan Shalawat Favorit?</span>
-            <span class="block text-white font-thin text-base md:text-2xl dark:text-gray-200">Mulai login hari ini.</span>
-            <Link href="/login"
+            <span class="block text-white font-thin text-base md:text-2xl dark:text-gray-200">Mulai dengarkan hari ini.</span>
+            <Link href="/muhud/1"
                 class="bg-white rounded-lg px-4 py-1.5 mt-4 text-sm w-max text-green-400 font-bold tracking-wider leading-7 sm:inline-block hover:bg-green-600 md:mt-10 md:text-base">
-            Login
+            Mulai
             <span class="text-green-400" aria-hidden="true">&rarr;</span>
             </Link>
         </div>

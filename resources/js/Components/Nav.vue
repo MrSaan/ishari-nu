@@ -38,20 +38,20 @@
             </li>
             <li class="border-t-[1px] my-2 border-gray-400">
             </li>
-            <li>
+            <!-- <li>
                 <NavLink href="/muhud" :active="$page.component === 'Note'">
                     <PencilSquareIcon class="w-5 h-5"
                         :class="{ 'text-white': $page.component === 'Muhud', 'text-green-600': $page.component !== 'Note' }" />
                     <span class="mx-4 text-lg font-semibold">Note</span>
                 </NavLink>
-            </li>
-            <li>
+            </li> -->
+            <!-- <li>
                 <NavLink href="/loved/1" :active="$page.component === 'Loved'">
                     <HeartIcon class="w-5 h-5"
                         :class="{ 'text-white': $page.component === 'Muhud', 'text-green-600': $page.component !== 'Loved' }" />
                     <span class="mx-4 text-lg font-semibold">Disukai</span>
                 </NavLink>
-            </li>
+            </li> -->
             <li>
                 <NavLink href="/support" :active="$page.component === 'SupportUs'">
                     <GiftIcon class="w-5 h-5"

@@ -12,7 +12,7 @@
 
         <!-- Dropdown -->
         <div class="m-4 ">
-            <Dropdown :align="right">
+            <!-- <Dropdown :align="right">
                 <template #trigger>
                     <button type="button" class="inline-flex max-w-xs items-center rounded-full text-sm">
                         <span class=" sr-only">Open user menu</span>
@@ -50,7 +50,7 @@
                         </DropdownLink>
                     </div>
                 </template>
-            </Dropdown>
+            </Dropdown> -->
         </div>
         <!-- end Dropdown -->
     </header>
